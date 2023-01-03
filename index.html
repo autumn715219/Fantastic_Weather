@@ -15,13 +15,12 @@
 	</head>
 	<body>
 		<sideBar>
-			<div class="blockSB" id="loactions">
 				<select
 					id="country-list"
 					class="blockSB__select"
-					onchange="fetchData(this.value)"
-				></select>
-			</div>
+					onchange="fetchData(this.value)">
+				</select>
+				<div class="blockSB" id="loactions"></div>
 		</sideBar>
 		<main>
 			<div class="mainBlock">
@@ -72,5 +71,6 @@
 			const CWB_API_KEY = "CWB-25142137-EFE4-4F9E-9B46-D41BF5BD73D5";
 		</script>
 		<script src="js/raining.js"></script>
+		<script src="js/locations.js"></script>
 	</body>
 </html>
