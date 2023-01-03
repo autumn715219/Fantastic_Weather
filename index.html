@@ -13,7 +13,7 @@
 <body>
 	<!-- 美化雨量觀測顯示、資料處理或建立資料分頁功能 -->
 	<h3>雨量觀測</h3>
-	<div id="raining"></div>
+	<div id="raining" style="display: none;"></div>
 
 	<!--
 		完成各縣市氣象預報功能
@@ -27,6 +27,16 @@
 		// https://opendata.cwb.gov.tw/index
 		const CWB_API_KEY="CWB-25142137-EFE4-4F9E-9B46-D41BF5BD73D5";
 	</script>
+
+	<!--各鄉鎮下拉選單-->
+    <select id="country-list" onchange="fetchData(this.value)"></select>
+	<div id="loactions"></div>
+
+
+
+
+	
 	<script src="js/raining.js"></script>
+	<script src="js/locations.js"></script>
 </body>
 </html>
