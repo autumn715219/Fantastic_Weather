@@ -1,42 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>雨量觀測</title>
-	<!-- 建立整體樣式指導：基礎字型、字體、基底色、標題、段落樣式等等 -->
-	<link rel="stylesheet" type="text/css" href="css/common.css" />
-	<!-- 建立雨量觀測部份的樣式 -->
-	<link rel="stylesheet" type="text/css" href="css/raining.css" />
-</head>
-<body>
-	<!-- 美化雨量觀測顯示、資料處理或建立資料分頁功能 -->
-	<h3>雨量觀測</h3>
-	<div id="raining" style="display: none;"></div>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>雨量觀測</title>
+		<!-- 建立整體樣式指導：基礎字型、字體、基底色、標題、段落樣式等等 -->
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="css/common.css" />
+		<link rel="stylesheet" type="text/css" href="css/sidebar.css" />
 
-	<!--
-		完成各縣市氣象預報功能
-		請使用中央氣象局公開 API 的第一個資料集 (/v1/rest/datastore/F-C0032-001)
-		https://opendata.cwb.gov.tw/dist/opendata-swagger.html?urls.primaryName=openAPI#/
-	-->
-	<h3>各縣市最新氣象預報 ( 文字描述、低溫、高溫 )</h3>
-	<div id="weather"></div>
-	<script>
-		// 以下是我申請的 KEY 請使用無所謂，你也可以自己去中央氣象局網站申請一個
-		// https://opendata.cwb.gov.tw/index
-		const CWB_API_KEY="CWB-25142137-EFE4-4F9E-9B46-D41BF5BD73D5";
-	</script>
-
-	<!--各鄉鎮下拉選單-->
-    <select id="country-list" onchange="fetchData(this.value)"></select>
-	<div id="loactions"></div>
-
-
-
-
-	
-	<script src="js/raining.js"></script>
-	<script src="js/locations.js"></script>
-</body>
+		<!-- 建立雨量觀測部份的樣式 -->
+		<link rel="stylesheet" type="text/css" href="css/raining.css" />
+	</head>
+	<body>
+		<sideBar>
+				<select
+					id="country-list"
+					class="blockSB__select"
+					onchange="fetchData(this.value)">
+				</select>
+				<div class="blockSB" id="loactions"></div>
+		</sideBar>
+		<main>
+			<div class="mainBlock">
+				<div class="headline">
+					<div class="headline__container">
+						<div class="headline__area areaTitle"></div>
+						<div class="headline__temp tempTitle"></div>
+						<div class="headline__condition content"></div>
+						<div class="headline__subtemp content"></div>
+					</div>
+				</div>
+				<div class="areaInfo">
+					<div class="areaInfo__container">
+						<div class="box byHour">
+							<div class="byHour__title infoBold">
+								每小時天氣預測
+							</div>
+							<div class="hourInfo"></div>
+						</div>
+						<div class="box byWeek">
+							<div class="byWeek__title infoBold">
+								7天天氣預測
+							</div>
+						</div>
+						<div class="box UV">
+							<div class="UV__title infoBold">紫外線指數</div>
+							<div class="UV__num digitMedium"></div>
+							<div class="UV__level"></div>
+							<div class="UVBox">
+								<div class="UVBox__barBG">
+									<div class="UVBox__bar">
+										<div class="UVBox__point"></div>
+									</div>
+								</div>
+							</div>
+							<div class="UV__info info"></div>
+						</div>
+						<div class="box humidity"></div>
+						<div class="box apparentTemp"></div>
+						<div class="box conclusion"></div>
+					</div>
+				</div>
+			</div>
+		</main>
+		<script>
+			// 以下是我申請的 KEY 請使用無所謂，你也可以自己去中央氣象局網站申請一個
+			// https://opendata.cwb.gov.tw/index
+			const CWB_API_KEY = "CWB-25142137-EFE4-4F9E-9B46-D41BF5BD73D5";
+		</script>
+		<script src="js/raining.js"></script>
+		<script src="js/locations.js"></script>
+	</body>
 </html>

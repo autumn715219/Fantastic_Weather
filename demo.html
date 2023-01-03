@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>雨量觀測</title>
+		<!-- 建立整體樣式指導：基礎字型、字體、基底色、標題、段落樣式等等 -->
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="css/common.css" />
+		<link rel="stylesheet" type="text/css" href="css/sidebar.css" />
+
+		<!-- 建立雨量觀測部份的樣式 -->
+		<link rel="stylesheet" type="text/css" href="css/raining.css" />
+	</head>
+	<body>
+		<sideBar>
+			<div class="blockSB" id="loactions">
+				<select
+					id="country-list"
+					class="blockSB__select"
+					onchange="fetchData(this.value)"
+				>
+					<option>請選擇你最愛的寵物</option>
+					<option>Dog</option>
+					<option>Cat</option>
+					<option>Hamster</option>
+					<option>Parrot</option>
+					<option>Spider</option>
+					<option>Goldfish</option>
+				</select>
+				<div class="blockSB__container">
+					<div class="blockSB__area areaTitleSB">頭份鎮</div>
+					<div class="blockSB__condition contentSB">多雲時晴</div>
+					<div class="blockSB__temp tempTitleSB">17°</div>
+					<div class="blockSB__subTemp contentSB">
+						最高21° 最低17°
+					</div>
+				</div>
+				<hr class="blockSB__hr" />
+				<div class="blockSB__container">
+					<div class="blockSB__area areaTitleSB">頭份鎮</div>
+					<div class="blockSB__condition contentSB">多雲時晴</div>
+					<div class="blockSB__temp tempTitleSB">17°</div>
+					<div class="blockSB__subTemp contentSB">
+						最高21° 最低17°
+					</div>
+				</div>
+				<hr class="blockSB__hr" />
+				<div class="blockSB__container">
+					<div class="blockSB__area areaTitleSB">新北市</div>
+					<div class="blockSB__condition contentSB">毛毛雨</div>
+					<div class="blockSB__temp tempTitleSB">23°</div>
+					<div class="blockSB__subTemp contentSB">
+						最高21° 最低17°
+					</div>
+				</div>
+				<hr class="blockSB__hr" />
+				<div class="blockSB__container">
+					<div class="blockSB__area areaTitleSB">新北市</div>
+					<div class="blockSB__condition contentSB">毛毛雨</div>
+					<div class="blockSB__temp tempTitleSB">23°</div>
+					<div class="blockSB__subTemp contentSB">
+						最高21° 最低17°
+					</div>
+				</div>
+				<hr class="blockSB__hr" />
+				<div class="blockSB__container">
+					<div class="blockSB__area areaTitleSB">新北市</div>
+					<div class="blockSB__condition contentSB">毛毛雨</div>
+					<div class="blockSB__temp tempTitleSB">23°</div>
+					<div class="blockSB__subTemp contentSB">
+						最高21° 最低17°
+					</div>
+				</div>
+				<hr class="blockSB__hr" />
+				<div class="blockSB__container">
+					<div class="blockSB__area areaTitleSB">新北市</div>
+					<div class="blockSB__condition contentSB">毛毛雨</div>
+					<div class="blockSB__temp tempTitleSB">23°</div>
+					<div class="blockSB__subTemp contentSB">
+						最高21° 最低17°
+					</div>
+				</div>
+				<hr class="blockSB__hr" />
+				<div class="blockSB__container">
+					<div class="blockSB__area areaTitleSB">新北市</div>
+					<div class="blockSB__condition contentSB">毛毛雨</div>
+					<div class="blockSB__temp tempTitleSB">23°</div>
+					<div class="blockSB__subTemp contentSB">
+						最高21° 最低17°
+					</div>
+				</div>
+				<hr class="blockSB__hr" />
+				<div class="blockSB__container">
+					<div class="blockSB__area areaTitleSB">新北市</div>
+					<div class="blockSB__condition contentSB">毛毛雨</div>
+					<div class="blockSB__temp tempTitleSB">23°</div>
+					<div class="blockSB__subTemp contentSB">
+						最高21° 最低17°
+					</div>
+				</div>
+				<hr class="blockSB__hr" />
+				<div class="blockSB__container">
+					<div class="blockSB__area areaTitleSB">新北市</div>
+					<div class="blockSB__condition contentSB">毛毛雨</div>
+					<div class="blockSB__temp tempTitleSB">23°</div>
+					<div class="blockSB__subTemp contentSB">
+						最高21° 最低17°
+					</div>
+				</div>
+				<hr class="blockSB__hr" />
+				<div class="blockSB__container">
+					<div class="blockSB__area areaTitleSB">新北市</div>
+					<div class="blockSB__condition contentSB">毛毛雨</div>
+					<div class="blockSB__temp tempTitleSB">23°</div>
+					<div class="blockSB__subTemp contentSB">
+						最高21° 最低17°
+					</div>
+				</div>
+				<hr class="blockSB__hr" />
+				<div class="blockSB__container">
+					<div class="blockSB__area areaTitleSB">新北市</div>
+					<div class="blockSB__condition contentSB">毛毛雨</div>
+					<div class="blockSB__temp tempTitleSB">23°</div>
+					<div class="blockSB__subTemp contentSB">
+						最高21° 最低17°
+					</div>
+				</div>
+			</div>
+		</sideBar>
+		<main>
+			<div class="mainBlock">
+				<div class="headline">
+					<div class="headline__container">
+						<div class="headline__area areaTitle">頭份鎮</div>
+						<div class="headline__temp tempTitle">17°</div>
+						<div class="headline__condition content">微風</div>
+						<div class="headline__subtemp content">
+							最高21° 最低17°
+						</div>
+					</div>
+				</div>
+				<div class="areaInfo">
+					<div class="areaInfo__container">
+						<div class="box byHour">
+							<div class="byHour__title infoBold">
+								每小時天氣預測
+							</div>
+							<div class="hourInfo">
+								<div class="hourInfo__container">
+									<div class="hourInfo__time infobold">
+										下午11時
+									</div>
+									<div class="hourInfo__iconBox">
+										<img
+											class="hourInfo__icon"
+											src="./image/icon/cloudy.png"
+										/>
+									</div>
+									<div class="hourInfo__temp content">
+										15°
+									</div>
+								</div>
+								<div class="hourInfo__container">
+									<div class="hourInfo__time infobold">
+										下午11時
+									</div>
+									<div class="hourInfo__iconBox">
+										<img
+											class="hourInfo__icon"
+											src="./image/icon/cloudy.png"
+										/>
+									</div>
+									<div class="hourInfo__temp content">
+										15°
+									</div>
+								</div>
+								<div class="hourInfo__container">
+									<div class="hourInfo__time infobold">
+										下午11時
+									</div>
+									<div class="hourInfo__iconBox">
+										<img
+											class="hourInfo__icon"
+											src="./image/icon/cloudy.png"
+										/>
+									</div>
+									<div class="hourInfo__temp content">
+										15°
+									</div>
+								</div>
+								<div class="hourInfo__container">
+									<div class="hourInfo__time infobold">
+										下午11時
+									</div>
+									<div class="hourInfo__iconBox">
+										<img
+											class="hourInfo__icon"
+											src="./image/icon/cloudy.png"
+										/>
+									</div>
+									<div class="hourInfo__temp content">
+										15°
+									</div>
+								</div>
+								<div class="hourInfo__container">
+									<div class="hourInfo__time infobold">
+										下午11時
+									</div>
+									<div class="hourInfo__iconBox">
+										<img
+											class="hourInfo__icon"
+											src="./image/icon/cloudy.png"
+										/>
+									</div>
+									<div class="hourInfo__temp content">
+										15°
+									</div>
+								</div>
+								<div class="hourInfo__container">
+									<div class="hourInfo__time infobold">
+										下午11時
+									</div>
+									<div class="hourInfo__iconBox">
+										<img
+											class="hourInfo__icon"
+											src="./image/icon/cloudy.png"
+										/>
+									</div>
+									<div class="hourInfo__temp content">
+										15°
+									</div>
+								</div>
+								<div class="hourInfo__container">
+									<div class="hourInfo__time infobold">
+										下午11時
+									</div>
+									<div class="hourInfo__iconBox">
+										<img
+											class="hourInfo__icon"
+											src="./image/icon/cloudy.png"
+										/>
+									</div>
+									<div class="hourInfo__temp content">
+										15°
+									</div>
+								</div>
+								<div class="hourInfo__container">
+									<div class="hourInfo__time infobold">
+										下午11時
+									</div>
+									<div class="hourInfo__iconBox">
+										<img
+											class="hourInfo__icon"
+											src="./image/icon/cloudy.png"
+										/>
+									</div>
+									<div class="hourInfo__temp content">
+										15°
+									</div>
+								</div>
+								<div class="hourInfo__container">
+									<div class="hourInfo__time infobold">
+										下午11時
+									</div>
+									<div class="hourInfo__iconBox">
+										<img
+											class="hourInfo__icon"
+											src="./image/icon/cloudy.png"
+										/>
+									</div>
+									<div class="hourInfo__temp content">
+										15°
+									</div>
+								</div>
+								<div class="hourInfo__container">
+									<div class="hourInfo__time infobold">
+										下午11時
+									</div>
+									<div class="hourInfo__iconBox">
+										<img
+											class="hourInfo__icon"
+											src="./image/icon/cloudy.png"
+										/>
+									</div>
+									<div class="hourInfo__temp content">
+										15°
+									</div>
+								</div>
+								<div class="hourInfo__container">
+									<div class="hourInfo__time infobold">
+										下午11時
+									</div>
+									<div class="hourInfo__iconBox">
+										<img
+											class="hourInfo__icon"
+											src="./image/icon/cloudy.png"
+										/>
+									</div>
+									<div class="hourInfo__temp content">
+										15°
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="box byWeek">
+							<div class="byWeek__title infoBold">
+								7天天氣預測
+							</div>
+
+							<div class="dayInfo">
+								<div class="dayInfo__container">
+									<div class="dayInfo__date">今天</div>
+									<div class="dayInfo__iconbox">
+										<img
+											class="dayInfo__icon"
+											src="./image/icon/cloudy.png"
+										/>
+									</div>
+									<div class="tempBox">
+										<div class="tempBox__low">17°</div>
+										<div class="tempBox__barBG">
+											<div class="tempBox__bar"></div>
+										</div>
+										<div class="tempBox__high">21°</div>
+									</div>
+								</div>
+							</div>
+							<div class="dayInfo">
+								<div class="dayInfo__container">
+									<div class="dayInfo__date">今天</div>
+									<div class="dayInfo__iconbox">
+										<img
+											class="dayInfo__icon"
+											src="./image/icon/cloudy.png"
+										/>
+									</div>
+									<div class="tempBox">
+										<div class="tempBox__low">17°</div>
+										<div class="tempBox__barBG">
+											<div class="tempBox__bar"></div>
+										</div>
+										<div class="tempBox__high">21°</div>
+									</div>
+								</div>
+							</div>
+							<div class="dayInfo">
+								<div class="dayInfo__container">
+									<div class="dayInfo__date">今天</div>
+									<div class="dayInfo__iconbox">
+										<img
+											class="dayInfo__icon"
+											src="./image/icon/cloudy.png"
+										/>
+									</div>
+									<div class="tempBox">
+										<div class="tempBox__low">17°</div>
+										<div class="tempBox__barBG">
+											<div class="tempBox__bar"></div>
+										</div>
+										<div class="tempBox__high">21°</div>
+									</div>
+								</div>
+							</div>
+							<div class="dayInfo">
+								<div class="dayInfo__container">
+									<div class="dayInfo__date">今天</div>
+									<div class="dayInfo__iconbox">
+										<img
+											class="dayInfo__icon"
+											src="./image/icon/cloudy.png"
+										/>
+									</div>
+									<div class="tempBox">
+										<div class="tempBox__low">17°</div>
+										<div class="tempBox__barBG">
+											<div class="tempBox__bar"></div>
+										</div>
+										<div class="tempBox__high">21°</div>
+									</div>
+								</div>
+							</div>
+							<div class="dayInfo">
+								<div class="dayInfo__container">
+									<div class="dayInfo__date">今天</div>
+									<div class="dayInfo__iconbox">
+										<img
+											class="dayInfo__icon"
+											src="./image/icon/cloudy.png"
+										/>
+									</div>
+									<div class="tempBox">
+										<div class="tempBox__low">17°</div>
+										<div class="tempBox__barBG">
+											<div class="tempBox__bar"></div>
+										</div>
+										<div class="tempBox__high">21°</div>
+									</div>
+								</div>
+							</div>
+							<div class="dayInfo">
+								<div class="dayInfo__container">
+									<div class="dayInfo__date">今天</div>
+									<div class="dayInfo__iconbox">
+										<img
+											class="dayInfo__icon"
+											src="./image/icon/cloudy.png"
+										/>
+									</div>
+									<div class="tempBox">
+										<div class="tempBox__low">17°</div>
+										<div class="tempBox__barBG">
+											<div class="tempBox__bar"></div>
+										</div>
+										<div class="tempBox__high">21°</div>
+									</div>
+								</div>
+							</div>
+							<div class="dayInfo">
+								<div class="dayInfo__container">
+									<div class="dayInfo__date">今天</div>
+									<div class="dayInfo__iconbox">
+										<img
+											class="dayInfo__icon"
+											src="./image/icon/cloudy.png"
+										/>
+									</div>
+									<div class="tempBox">
+										<div class="tempBox__low">17°</div>
+										<div class="tempBox__barBG">
+											<div class="tempBox__bar"></div>
+										</div>
+										<div class="tempBox__high">21°</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="box UV">
+							<div class="UV__title infoBold">紫外線指數</div>
+							<div class="UV__num digitMedium">0</div>
+							<div class="UV__level">低量級</div>
+							<div class="UVBox">
+								<div class="UVBox__barBG">
+									<div class="UVBox__bar">
+										<div class="UVBox__point"></div>
+									</div>
+								</div>
+							</div>
+							<div class="UV__info info">
+								接下來的時間皆爲低量級。
+							</div>
+						</div>
+						<div class="box humidity"></div>
+						<div class="box apparentTemp"></div>
+						<div class="box conclusion"></div>
+					</div>
+				</div>
+			</div>
+		</main>
+		<script>
+			// 以下是我申請的 KEY 請使用無所謂，你也可以自己去中央氣象局網站申請一個
+			// https://opendata.cwb.gov.tw/index
+			const CWB_API_KEY = "CWB-25142137-EFE4-4F9E-9B46-D41BF5BD73D5";
+		</script>
+		<script src="js/raining.js"></script>
+	</body>
+</html>

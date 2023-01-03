@@ -1,122 +1,89 @@
-
+/* 鄉鎮市API */
 const countryIds={
-  "宜蘭縣":"F-D0047-001",
-  "桃園市":"F-D0047-005",
-  "新竹縣":"F-D0047-009",
-  "苗栗縣":"F-D0047-013",
-  "彰化縣":"F-D0047-017",
-  "南投縣":"F-D0047-021",
-  "雲林縣":"F-D0047-025",
-  "嘉義縣":"F-D0047-029",
-  "屏東縣":"F-D0047-033",
-  "臺東縣":"F-D0047-037",
-  "花蓮縣":"F-D0047-041",
-  "澎湖縣":"F-D0047-045",
-  "基隆市":"F-D0047-049",
-  "新竹市":"F-D0047-053",
-  "嘉義市":"F-D0047-057",
-  "臺北市":"F-D0047-061",
-  "高雄市":"F-D0047-049",
-  "新北市":"F-D0047-069",
-  "臺中市":"F-D0047-073",
-  "臺南市":"F-D0047-077",
-  "連江縣":"F-D0047-081",
-  "金門縣":"F-D0047-085",
+  "宜蘭縣":"F-D0047-003",
+  "桃園市":"F-D0047-007",
+  "新竹縣":"F-D0047-011",
+  "苗栗縣":"F-D0047-015",
+  "彰化縣":"F-D0047-019",
+  "南投縣":"F-D0047-023",
+  "雲林縣":"F-D0047-027",
+  "嘉義縣":"F-D0047-031",
+  "屏東縣":"F-D0047-035",
+  "臺東縣":"F-D0047-039",
+  "花蓮縣":"F-D0047-043",
+  "澎湖縣":"F-D0047-047",
+  "基隆市":"F-D0047-051",
+  "新竹市":"F-D0047-055",
+  "嘉義市":"F-D0047-059",
+  "臺北市":"F-D0047-063",
+  "高雄市":"F-D0047-067",
+  "新北市":"F-D0047-071",
+  "臺中市":"F-D0047-075",
+  "臺南市":"F-D0047-079",
+  "連江縣":"F-D0047-083",
+  "金門縣":"F-D0047-087",
 }
 
-//把資料塞入下拉選單
-let collegeSelect=document.getElementById("country-list");
-let inner="";
-for (var key in countryIds) {
-  //console.log("key " + key + " has value " + countryIds[key]);
-  inner+='<option value='+ countryIds[key] +'>'+key+'</option>';
+//下拉選單功能
+function initCountry(){
+  let countrySelect=document.getElementById("country-list");
+  let inner="";
+  for (let key in countryIds) {
+    if(key=="臺北市"){
+      inner+=`<option value="${countryIds[key]}" selected>${key}</option>`;
+    }else{
+      inner+=`<option value="${countryIds[key]}">${key}</option>`;
+    }
+  }
+  //初始化
+  countrySelect.innerHTML=inner;
+  countrySelect.addEventListener('change', fetchData(this.value));
+  fetchData(countryIds["臺北市"]);
 }
-collegeSelect.innerHTML=inner;
+initCountry();
 
 
-collegeSelect.addEventListener('change', fetchData(this.value));
-function fetchData(countryIds) {
-  fetch('https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-093?Authorization='+CWB_API_KEY+'&locationId='+countryIds)
-    .then(function (response) {
-      if (response.status !== 200) {
-        console.log(
-          'Looks like there was a problem. Status Code: ' + response.status
-        );
-        return;
-      }
-      response.json().then(function (data) {
-        console.log(countryIds);
-        console.log(data);
-        //document.getElementById('w3review').value = data;
-      });
-    })
-    .catch(function (err) {
-      console.log('Fetch Error :-S', err);
-    });
+async function fetchData(countryIds) {
+  let url = `https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-093?Authorization=${CWB_API_KEY}&locationId=${countryIds}`;
+  try {
+    let response = await fetch(url);
+    let data = await response.json();
+    if (response.status !== 200) {
+      console.log(' API 出了點問題. Status Code: ' + response.status );
+      return;
+    }else{
+      //內容
+      let locationArry = data.records.locations[0].location;
+      locationArry.forEach((item,i) => renderContent(item,i));
+      //console.log(countryIds);
+      //console.log(data.records.locations[0].location);
+    }
+  }    
+  catch (err) {
+    console.log({ "error": err });
+  }
+
 }
 
-// //向網站發送請求
-// fetch('https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-093?Authorization='+CWB_API_KEY+'&locationId=F-D0047-005')
+//組出內容
+const loactionsWrp = document.querySelector("#loactions");
 
-//   //將回應的資料取出
-//   .then(function (response) {
-//       return response.json();
-//   })
-
-//   //使用得到的資料
-//   .then(function (data) {
-//       console.log(data)
-//       讀到資料(將JSON格式轉換成JS可使用的object)
-//       let location = data["records"]["location"];
-
-//       //將資料放入norm這個陣列重新排列組合出norm新的陣列
-//       location.forEach(function (location) {
-//         locations[locations.indexOf(location["locationName"])] = {
-//               locationName: location["locationName"],
-//               weather: location["weatherElement"][0]["time"][1]["parameter"]["parameterName"],
-//               minT: location["weatherElement"][2]["time"][1]["parameter"]["parameterName"],
-//               maxT: location["weatherElement"][4]["time"][1]["parameter"]["parameterName"],
-//               pop: location["weatherElement"][1]["time"][1]["parameter"]["parameterName"]
-//           }
-//       });
-      
-//       讀取norm陣列的物件並判斷weather的值後放入網頁中
-//       ShowWeather(0);
-//   })
-
-//   //讀取norm陣列的物件並判斷weather的值後放入網頁中的函式
-// function ShowWeather(from, to){
-//   let container=document.querySelector("#locations");
-
-//   container.innerHTML = ''
-//   norm.slice(from, to).forEach(function (norm) {
-
-//       var className ;
-//       if(norm["weather"] ==='晴時多雲'){
-//           className = 'mostly-clear'
-//       }
-//       else if(norm["weather"] ==='陰天'){
-//           className = 'cloudy'
-//       }
-//       else if(norm["weather"] ==='多雲' || norm["weather"] ==='多雲時陰'){
-//           className = 'partly-cloudy'
-//       }
-//       else if(norm["weather"].match('雨')){
-//           className = 'rainy'
-//       }
-//       else if(norm["weather"] ==='晴天'){
-//           className = 'claear'
-//       }
-//       else{
-//           className = 'mostly-clear'
-//       }
-      
-//       container.innerHTML +=
-//       `<div class="card ${className}">
-//       <h2 class="h2">${norm["locationName"]}</h2>
-//       <div>明日天氣：${norm["weather"]}</div>
-//       <div>明日温度：${norm["minT"]}&degC ～ ${norm["maxT"]}&degC</div>
-//       <div>降雨機率：${norm["pop"]}%</div>
-//       <div>`
-//   });  
-// };
+const renderContent = (item) => {
+  //console.log(item)
+  let locationName = item.locationName; //地區
+  let locationWx = item.weatherElement[6].time[0].elementValue[0].value; //天氣現象
+  let locationT = item.weatherElement[1].time[0].elementValue[0].value; //平均溫度
+  let locationMinT = item.weatherElement[8].time[0].elementValue[0].value; //最低溫度
+  let locationMaxT = item.weatherElement[12].time[0].elementValue[0].value; //最高溫度
+  const htmlStr = `<div class="blockSB__container">
+                      <div class="blockSB__area areaTitleSB">${locationName}</div>
+                      <div class="blockSB__condition contentSB">${locationWx}</div>
+                      <div class="blockSB__temp tempTitleSB">${locationT}°</div>
+                      <div class="blockSB__subTemp contentSB">
+                          最高${locationMinT}° 最低${locationMaxT}°
+                      </div>
+                  </div>`
+  
+  loactionsWrp.insertAdjacentHTML("afterbegin",htmlStr);
+  
+};
