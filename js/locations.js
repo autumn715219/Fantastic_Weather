@@ -53,6 +53,7 @@ async function fetchData(countryIds) {
       return;
     }else{
       //內容
+      loactionsWrp.innerHTML="";
       let locationArry = data.records.locations[0].location;
       locationArry.forEach((item,i) => renderContent(item,i));
       //console.log(countryIds);
@@ -68,22 +69,22 @@ async function fetchData(countryIds) {
 //組出內容
 const loactionsWrp = document.querySelector("#loactions");
 
-const renderContent = (item) => {
-  //console.log(item)
+const renderContent = (item,i) => {
+  console.log( i + item.locationName)
   let locationName = item.locationName; //地區
   let locationWx = item.weatherElement[6].time[0].elementValue[0].value; //天氣現象
   let locationT = item.weatherElement[1].time[0].elementValue[0].value; //平均溫度
   let locationMinT = item.weatherElement[8].time[0].elementValue[0].value; //最低溫度
   let locationMaxT = item.weatherElement[12].time[0].elementValue[0].value; //最高溫度
-  const htmlStr = `<div class="blockSB__container">
+  const htmlStr = `<div class="blockSB__container" data-index="${i}">
                       <div class="blockSB__area areaTitleSB">${locationName}</div>
                       <div class="blockSB__condition contentSB">${locationWx}</div>
                       <div class="blockSB__temp tempTitleSB">${locationT}°</div>
                       <div class="blockSB__subTemp contentSB">
-                          最高${locationMinT}° 最低${locationMaxT}°
+                          最低${locationMinT}° 最高${locationMaxT}°
                       </div>
                   </div>`
   
-  loactionsWrp.insertAdjacentHTML("afterbegin",htmlStr);
+  loactionsWrp.insertAdjacentHTML("beforeend",htmlStr);
   
 };
