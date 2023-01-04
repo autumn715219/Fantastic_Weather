@@ -1,7 +1,8 @@
 @import "./common.styl"
 
 html
-	background: url('../image/background/clear_night.jpg') no-repeat center center fixed;
+	background: no-repeat center center fixed;
+	background-image: url('../image/background/morning_sun.jpg') 
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -29,7 +30,34 @@ blockTitle()
 	display: flex
 	align-items: center
 	color: rgba(256, 256 , 256, 0.5)
+
+	@media (max-width: 600px)
+		height: 20px
 	
+
+.hamburgerBox
+	width: 100%
+	height: 30px
+	position: absolute
+	top: 30px
+	left: 30px
+	display: none
+
+	.hamburger
+		max-height: 100%
+		object-fit: cover
+		cursor: pointer
+
+.closeBox
+	width: 100%
+	height: 20px
+	display: none
+	justify-content: flex-end
+
+	.close
+		max-height: 100%
+		object-fit: cover
+		cursor: pointer
 
 
 
@@ -40,8 +68,9 @@ blockTitle()
 	padding: 20px
 	-webkit-backdrop-filter:saturate(100%) blur(20px);  //for safari
 	backdrop-filter: saturate(100%) blur(20px)
-	background-color: rgba(240, 235 ,232, 0.8)
+	background-color: rgba(240, 235 ,232, 0.9)
 	overflow-y: auto
+	z-index: 1
 
 	&__select
 		margin-top: 20px
@@ -233,7 +262,7 @@ blockTitle()
 
 	&__container
 		width: 100%
-		height: 48px
+		height: 47px
 		display: flex
 		align-items: center
 		justify-content: space-between
@@ -345,9 +374,54 @@ blockTitle()
 		"block1 block1" "block2 block2" "block2 block2" "block3 block4" "block5 block6" 
 		justify-content: center
 
-
 	.blockSB
 		width: 200px
 
 	.mainBlock
 		padding-left: 200px
+
+@media (max-width: 600px)
+	.hamburgerBox
+		display: block
+
+	.closeBox
+		display: flex
+
+	.blockSB
+		width: 300px
+		z-index: 1
+		left: -300px
+
+	.mainBlock
+		padding-left: 0
+
+	.areaInfo__container
+		grid-template-columns: 150px 150px;
+		grid-template-rows: 150px 150px 150px 150px 150px ;
+
+	.dayInfo
+		&__container
+			height: 38px
+
+		&__iconbox
+			width: 20px
+			height: 20px
+
+	.UVBox
+		margin: 10px 0 10px 0
+
+	.humidity__info
+		margin-top: 44px;
+
+@keyframes slideIn 
+	0%
+		left: -300px
+	100%
+		left: 0px
+
+@keyframes slideOut
+	0%
+		left: 0px
+	100%
+		left: -300px
+

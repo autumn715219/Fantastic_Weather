@@ -48,7 +48,8 @@
   line-height: 1.5em;
 }
 html {
-  background: url("../image/background/clear_night.jpg") no-repeat center center fixed;
+  background: no-repeat center center fixed;
+  background-image: url("../image/background/morning_sun.jpg");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -60,6 +61,30 @@ html {
 *:after {
   box-sizing: inherit;
 }
+.hamburgerBox {
+  width: 100%;
+  height: 30px;
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  display: none;
+}
+.hamburgerBox .hamburger {
+  max-height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+}
+.closeBox {
+  width: 100%;
+  height: 20px;
+  display: none;
+  justify-content: flex-end;
+}
+.closeBox .close {
+  max-height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+}
 .blockSB {
   width: 250px;
   height: 100%;
@@ -67,8 +92,9 @@ html {
   padding: 20px;
   -webkit-backdrop-filter: saturate(100%) blur(20px);
   backdrop-filter: saturate(100%) blur(20px);
-  background-color: rgba(240,235,232,0.8);
+  background-color: rgba(240,235,232,0.9);
   overflow-y: auto;
+  z-index: 1;
 }
 .blockSB__select {
   margin-top: 20px;
@@ -263,7 +289,7 @@ html {
 }
 .dayInfo__container {
   width: 100%;
-  height: 48px;
+  height: 47px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -309,6 +335,11 @@ html {
   align-items: center;
   color: rgba(255,255,255,0.5);
 }
+@media (max-width: 600px) {
+  .UV__title {
+    height: 20px;
+  }
+}
 .UVBox {
   display: flex;
   align-items: center;
@@ -350,6 +381,11 @@ html {
   align-items: center;
   color: rgba(255,255,255,0.5);
 }
+@media (max-width: 600px) {
+  .humidity__title {
+    height: 20px;
+  }
+}
 .humidity__info {
   margin-top: 54px;
 }
@@ -365,6 +401,11 @@ html {
   display: flex;
   align-items: center;
   color: rgba(255,255,255,0.5);
+}
+@media (max-width: 600px) {
+  .apparentTemp__title {
+    height: 20px;
+  }
 }
 .apparentTemp__info {
   margin-top: 54px;
@@ -382,6 +423,11 @@ html {
   align-items: center;
   color: rgba(255,255,255,0.5);
 }
+@media (max-width: 600px) {
+  .conclusion__title {
+    height: 20px;
+  }
+}
 @media (max-width: 1200px) {
   .areaInfo__container {
     grid-template-columns: 180px 180px;
@@ -395,5 +441,102 @@ html {
   }
   .mainBlock {
     padding-left: 200px;
+  }
+}
+@media (max-width: 600px) {
+  .hamburgerBox {
+    display: block;
+  }
+  .closeBox {
+    display: flex;
+  }
+  .blockSB {
+    width: 300px;
+    z-index: 1;
+    left: -300px;
+  }
+  .mainBlock {
+    padding-left: 0;
+  }
+  .areaInfo__container {
+    grid-template-columns: 150px 150px;
+    grid-template-rows: 150px 150px 150px 150px 150px;
+  }
+  .dayInfo__container {
+    height: 38px;
+  }
+  .dayInfo__iconbox {
+    width: 20px;
+    height: 20px;
+  }
+  .UVBox {
+    margin: 10px 0 10px 0;
+  }
+  .humidity__info {
+    margin-top: 44px;
+  }
+}
+@-moz-keyframes slideIn {
+  0% {
+    left: -300px;
+  }
+  100% {
+    left: 0px;
+  }
+}
+@-webkit-keyframes slideIn {
+  0% {
+    left: -300px;
+  }
+  100% {
+    left: 0px;
+  }
+}
+@-o-keyframes slideIn {
+  0% {
+    left: -300px;
+  }
+  100% {
+    left: 0px;
+  }
+}
+@keyframes slideIn {
+  0% {
+    left: -300px;
+  }
+  100% {
+    left: 0px;
+  }
+}
+@-moz-keyframes slideOut {
+  0% {
+    left: 0px;
+  }
+  100% {
+    left: -300px;
+  }
+}
+@-webkit-keyframes slideOut {
+  0% {
+    left: 0px;
+  }
+  100% {
+    left: -300px;
+  }
+}
+@-o-keyframes slideOut {
+  0% {
+    left: 0px;
+  }
+  100% {
+    left: -300px;
+  }
+}
+@keyframes slideOut {
+  0% {
+    left: 0px;
+  }
+  100% {
+    left: -300px;
   }
 }

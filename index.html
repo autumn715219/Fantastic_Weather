@@ -11,15 +11,22 @@
 	</head>
 	<body>
 		<sideBar>
-			<div class="blockSB" id="loactions">
+			<div class="blockSB">
+				<div class="closeBox">
+					<img class="close" src="./image/icon/close.png" />
+				</div>
 				<select
 					id="country-list"
 					class="blockSB__select contentSB"
 					onchange="fetchData(this.value)"
 				></select>
+				<div id="loactions"></div>
 			</div>
 		</sideBar>
 		<main class="main">
+			<div class="hamburgerBox">
+				<img class="hamburger" src="./image/icon/hamburger.png" />
+			</div>
 			<div class="mainBlock">
 				<div class="headline">
 					<div class="headline__container">
@@ -64,7 +71,7 @@
 							<div class="apparentTemp__title infoBold">
 								體感溫度
 							</div>
-							<div class="apparentTemp__num digitMedium"></div>
+							<div class="apparentTemp__num digitMedium">15°</div>
 							<div class="apparentTemp__info info"></div>
 						</div>
 						<div class="box conclusion">
@@ -83,5 +90,6 @@
 			const CWB_API_KEY = "CWB-25142137-EFE4-4F9E-9B46-D41BF5BD73D5";
 		</script>
 		<script src="js/raining.js"></script>
+		<script src="js/sidebar.js"></script>
 	</body>
 </html>
