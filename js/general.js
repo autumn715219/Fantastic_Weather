@@ -3,29 +3,29 @@ const headline__temp_tempTitle = document.querySelector(".headline__temp");
 const headline__condition_content = document.querySelector(".headline__condition");
 const headline__subtemp_content = document.querySelector(".headline__subtemp");
 
-const countyList = {
-  0: "臺北市",
-  1: "宜蘭縣",
-  2: "桃園市",
-  3: "新竹縣",
-  4: "苗栗縣",
-  5: "彰化縣",
-  6: "南投縣",
-  7: "雲林縣",
-  8: "嘉義縣",
-  9: "屏東縣",
-  10: "臺東縣",
-  11: "花蓮縣",
-  12: "澎湖縣",
-  13: "基隆市",
-  14: "新竹市",
-  15: "嘉義市",
-  16: "高雄市",
-  17: "新北市",
-  18: "臺中市",
-  19: "臺南市",
-  20: "連江縣",
-  21: "金門縣",
+const countryNumber = {
+  "宜蘭縣": "F-D0047-003",
+  "桃園市": "F-D0047-007",
+  "新竹縣": "F-D0047-011",
+  "苗栗縣": "F-D0047-015",
+  "彰化縣": "F-D0047-019",
+  "南投縣": "F-D0047-023",
+  "雲林縣": "F-D0047-027",
+  "嘉義縣": "F-D0047-031",
+  "屏東縣": "F-D0047-035",
+  "臺東縣": "F-D0047-039",
+  "花蓮縣": "F-D0047-043",
+  "澎湖縣": "F-D0047-047",
+  "基隆市": "F-D0047-051",
+  "新竹市": "F-D0047-055",
+  "嘉義市": "F-D0047-059",
+  "臺北市": "F-D0047-063",
+  "高雄市": "F-D0047-067",
+  "新北市": "F-D0047-071",
+  "臺中市": "F-D0047-075",
+  "臺南市": "F-D0047-079",
+  "連江縣": "F-D0047-083",
+  "金門縣": "F-D0047-087",
 };
 
 async function fetchWeatherApi() {
@@ -63,16 +63,11 @@ fetchWeatherApi().then(function (data) {
     headline__temp_tempTitle.textContent = `${Math.round(totalIntTaipeiTemperature / 2)}` + "°";
     headline__condition_content.textContent = `${nowWeatherPhenomena[5]}`;
     headline__subtemp_content.textContent = "最高" + `${nowMaxTemperature[5]}` + "°" + " " + "最低" + `${nowMinTemperature[5]}` + "°";
-
-    const cityList = document.getElementById("city-list");
-    const option = document.createElement("option");
-    option.setAttribute("value", countyList[i]);
-    option.appendChild(document.createTextNode(countyList[i]));
-    cityList.appendChild(option);
-
+    
+    const cityList = document.getElementById("country-list");
     function cityMenu(e) {
       let selectCityValue = e.target.value;
-      if (selectCityValue === data.records.location[i].locationName) {
+      if (selectCityValue === countryNumber[data.records.location[i].locationName]) {
         const intMinTemperature = parseInt(nowMinTemperature[i]);
         const intMaxTemperature = parseInt(nowMaxTemperature[i]);
         const totalIntTemperature = intMinTemperature + intMaxTemperature;
