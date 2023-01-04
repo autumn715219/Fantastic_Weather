@@ -4,25 +4,22 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>雨量觀測</title>
-		<!-- 建立整體樣式指導：基礎字型、字體、基底色、標題、段落樣式等等 -->
+		<title>天氣</title>
 		<link rel="stylesheet" type="text/css" href="css/reset.css" />
 		<link rel="stylesheet" type="text/css" href="css/common.css" />
-		<link rel="stylesheet" type="text/css" href="css/sidebar.css" />
-
-		<!-- 建立雨量觀測部份的樣式 -->
-		<link rel="stylesheet" type="text/css" href="css/raining.css" />
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
 	</head>
 	<body>
 		<sideBar>
+			<div class="blockSB" id="loactions">
 				<select
 					id="country-list"
-					class="blockSB__select"
-					onchange="fetchData(this.value)">
-				</select>
-				<div class="blockSB" id="loactions"></div>
+					class="blockSB__select contentSB"
+					onchange="fetchData(this.value)"
+				></select>
+			</div>
 		</sideBar>
-		<main>
+		<main class="main">
 			<div class="mainBlock">
 				<div class="headline">
 					<div class="headline__container">
@@ -58,9 +55,24 @@
 							</div>
 							<div class="UV__info info"></div>
 						</div>
-						<div class="box humidity"></div>
-						<div class="box apparentTemp"></div>
-						<div class="box conclusion"></div>
+						<div class="box humidity">
+							<div class="humidity__title infoBold">溼度</div>
+							<div class="humidity__num digitMedium"></div>
+							<div class="humidity__info info"></div>
+						</div>
+						<div class="box apparentTemp">
+							<div class="apparentTemp__title infoBold">
+								體感溫度
+							</div>
+							<div class="apparentTemp__num digitMedium"></div>
+							<div class="apparentTemp__info info"></div>
+						</div>
+						<div class="box conclusion">
+							<div class="conclusion__title infoBold">
+								綜合描述
+							</div>
+							<div class="conclusion__info info"></div>
+						</div>
 					</div>
 				</div>
 			</div>
