@@ -98,10 +98,11 @@ const renderSevenDaate = (item,i,min,max) => {
   console.log (item,i,min,max)
   let range = max - min;
   let left = (item.minT - min)/range * 100 ;
-  let lefeVale = left.toFixed(2)+'%'
+  let leftValue = left.toFixed(2)+'%'
 
-  let width = (item.maxT - item.minT)/range * 100 ;
-  let widthValue = width.toFixed(2) +'%';
+  let right = (max - item.maxT)/range * 100 ;
+  let rightValue = right.toFixed(2) +'%';
+
   const htmlStr = `<div class="dayInfo">
                       <div class="dayInfo__container">
                         <div class="dayInfo__date">${item.week}</div>
@@ -113,8 +114,9 @@ const renderSevenDaate = (item,i,min,max) => {
                         </div>
                         <div class="tempBox">
                           <div class="tempBox__low">${item.minT}</div>
-                          <div class="tempBox__barBG" style="position:relative;">
-                            <div class="tempBox__bar" style="position:absolute; left:${lefeVale}; width:${widthValue}"></div>
+                          <div class="tempBox__barBG">
+                            <div class="tempBox__bar" style="clip-path:inset(0 ${rightValue} 0 ${leftValue} round 5px);">
+                            </div>
                           </div>
                           <div class="tempBox__high">${item.maxT}</div>
                         </div>
