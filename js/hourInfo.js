@@ -139,18 +139,18 @@ function renderHourForecast(){
     const backgroundImg=iconAndImgData[weatherPatternValue][1];
     console.log(backgroundImg)
     if (getHour>=5 && getHour<9 && backgroundImg==="morning_sun"){
-        document.documentElement.style.backgroundImage="url('../image/background/early_morning_sun.jpg')";
+        document.documentElement.style.backgroundImage="url('image/background/early_morning_sun.jpg')";
     }else if (getHour>=16 && getHour<19 && backgroundImg==="morning_sun"){
-        document.documentElement.style.backgroundImage="url('../image/background/evening_sun.jpg')";
+        document.documentElement.style.backgroundImage="url('image/background/evening_sun.jpg')";
     }else if (getHour>=19 && getHour<24 && backgroundImg==="morning_sun"){
-        document.documentElement.style.backgroundImage="url('../image/background/night.jpg')";
+        document.documentElement.style.backgroundImage="url('image/background/night.jpg')";
     }else if (getHour>=19 && getHour<24 && backgroundImg==="morning_partly_cloudy"){
-        document.documentElement.style.backgroundImage="url('../image/background/night_partly_cloudy.jpg')";
+        document.documentElement.style.backgroundImage="url('image/background/night_partly_cloudy.jpg')";
 
     }else if (getHour>=19 && getHour<24 && backgroundImg==="morning_light_rain"){
-        document.documentElement.style.backgroundImage="url('../image/background/night_light_rain.jpg')";
+        document.documentElement.style.backgroundImage="url('image/background/night_light_rain.jpg')";
     }else{
-        document.documentElement.style.backgroundImage=`url('../image/background/${backgroundImg}.jpg')`;
+        document.documentElement.style.backgroundImage=`url('image/background/${backgroundImg}.jpg')`;
     }
 
     hourInfoContainer.appendChild(TTimeDiv);
