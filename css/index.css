@@ -368,6 +368,15 @@ body::-webkit-scrollbar-thumb {
   border-radius: 5px;
   position: absolute;
 }
+.tempBox__point {
+  height: 10px;
+  width: 10px;
+  position: absolute;
+  top: -2px;
+  border-radius: 6px;
+  background-color: #fff;
+  border: 2px solid #414141;
+}
 .UV {
   grid-area: block3;
   color: #fff;
