@@ -238,15 +238,15 @@ body::-webkit-scrollbar-thumb {
   border-radius: 10px;
   -webkit-backdrop-filter: saturate(100%) blur(20px);
   backdrop-filter: saturate(100%) blur(20px);
-  background-color: rgba(0,0,0,0.1);
+  background-color: rgba(0,0,0,0.12);
 }
 .byHour {
   grid-area: block1;
   display: flex;
   flex-wrap: wrap;
   overflow-x: auto;
-  padding-left: 20px;
   scrollbar-gutter: stable both-edges;
+  padding-left: 10px;
 }
 .byHour::-webkit-scrollbar {
   height: 8px;
@@ -283,7 +283,7 @@ body::-webkit-scrollbar-thumb {
   flex-wrap: wrap;
   justify-content: center;
   color: #fff;
-  margin-right: 30px;
+  margin-right: 20px;
 }
 .hourInfo__time {
   width: 100%;
@@ -309,7 +309,7 @@ body::-webkit-scrollbar-thumb {
   width: 100%;
   display: flex;
   align-items: center;
-  margin-left: 20px;
+  margin-left: 10px;
   margin-bottom: 5px;
 }
 .byWeek__hr {
@@ -318,7 +318,7 @@ body::-webkit-scrollbar-thumb {
   margin: 0 auto;
 }
 .dayInfo {
-  width: 90%;
+  width: 95%;
   height: auto;
   margin: 0 auto;
 }
@@ -483,6 +483,9 @@ body::-webkit-scrollbar-thumb {
     height: 20px;
   }
 }
+.conclusion__info {
+  margin-top: 5px;
+}
 @media (max-width: 1200px) {
   .areaInfo__container {
     grid-template-columns: 150px 150px;
@@ -502,7 +505,10 @@ body::-webkit-scrollbar-thumb {
     margin: 10px 0 10px 0;
   }
   .humidity__info {
-    margin-top: 34px;
+    margin-top: 44px;
+  }
+  .apparentTemp__info {
+    margin-top: 44px;
   }
 }
 @media (max-width: 600px) {
