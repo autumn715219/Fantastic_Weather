@@ -12,16 +12,14 @@ function sidebarSlide() {
 		blockSB.style.animation = "slideOut 0.5s both";
 	});
 
-	main.addEventListener(
-		"click",
-		() => {
-			blockSB.style.animation = "slideOut 0.5s both";
-		},
-		true
-	);
+	if (window.innerWidth < 600) {
+		main.addEventListener(
+			"click",
+			() => {
+				blockSB.style.animation = "slideOut 0.5s both";
+			},
+			true
+		);
+	}
 }
 sidebarSlide();
-
-// if (window.innerWidth >= 600) {
-
-// }

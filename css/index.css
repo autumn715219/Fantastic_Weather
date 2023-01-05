@@ -49,7 +49,7 @@
 }
 html {
   background: no-repeat center center fixed;
-  background-image: url("../image/background/morning_sun.jpg");
+  background-image: url("../image/background/night_partly_cloudy.jpg");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -214,7 +214,7 @@ html {
   border-radius: 10px;
   -webkit-backdrop-filter: saturate(100%) blur(20px);
   backdrop-filter: saturate(100%) blur(20px);
-  background-color: rgba(128,128,128,0.08);
+  background-color: rgba(0,0,0,0.09);
 }
 .byHour {
   grid-area: block1;
@@ -308,6 +308,15 @@ html {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 170px;
+}
+.tempBox__low {
+  width: 25px;
+  text-align: right;
+}
+.tempBox__high {
+  width: 25px;
+  text-align: right;
 }
 .tempBox__barBG {
   width: 100px;
@@ -315,12 +324,14 @@ html {
   border-radius: 5px;
   margin: 0 10px 0 10px;
   background-color: rgba(0,0,0,0.2);
+  position: relative;
 }
 .tempBox__bar {
   width: 100%;
   height: 5px;
   background: linear-gradient(90deg, #22c1c3 0%, #ffb30e 100%);
   border-radius: 5px;
+  position: absolute;
 }
 .UV {
   grid-area: block3;
@@ -355,7 +366,7 @@ html {
 .UVBox__bar {
   width: 100%;
   height: 5px;
-  background: linear-gradient(90deg, #6bd739 0%, #ffc509 26%, #ff871d 46%, #fc3966 72%, #884ab3 100%);
+  background: linear-gradient(90deg, #65eb27 0%, #ffd709 25%, #ff871d 50%, #ff1047 75%, #884ab3 100%);
   border-radius: 5px;
   position: relative;
 }
