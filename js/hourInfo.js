@@ -1,43 +1,43 @@
 let hourInfoRecords=null;
-const iconData={
-    01: "sun",
-    02: "cloudy",
-    03: "cloudy",
-    04: "cloud",
-    05: "cloud",
-    06: "cloud",
-    07: "cloud",
-    24: "cloud",
-    25: "cloud",
-    26: "cloud",
-    27: "cloud",
-    28: "cloud",
-    08: "rain",
-    09: "rain",
-    10: "rain",
-    11: "rain",
-    13: "rain",
-    14: "rain",
-    17: "rain",
-    20: "rain",
-    29: "rain",
-    31: "rain",
-    32: "rain",
-    38: "rain",
-    39: "rain",
-    12: "sun_rain",
-    16: "sun_rain",
-    19: "sun_rain",
-    30: "sun_rain",
-    15: "thunderstorm",
-    18: "thunderstorm",
-    21: "thunderstorm",
-    22: "thunderstorm",
-    33: "thunderstorm",
-    34: "thunderstorm",
-    35: "thunderstorm",
-    36: "thunderstorm",
-    41: "thunderstorm"
+const iconAndImgData={
+    01: ["sun", "morning_sun"],
+    02: ["cloudy", "morning_partly_cloudy"],
+    03: ["cloudy", "morning_partly_cloudy"],
+    04: ["cloud", "morning_cloudy"],
+    05: ["cloud", "morning_cloudy"],
+    06: ["cloud", "morning_cloudy"],
+    07: ["cloud", "morning_cloudy"],
+    24: ["cloud", "morning_cloudy"],
+    25: ["cloud", "morning_cloudy"],
+    26: ["cloud", "morning_cloudy"],
+    27: ["cloud", "morning_cloudy"],
+    28: ["cloud", "morning_cloudy"],
+    08: ["rain", "morning_light_rain"],
+    09: ["rain", "morning_light_rain"],
+    10: ["rain", "morning_light_rain"],
+    11: ["rain", "morning_light_rain"],
+    13: ["rain", "morning_light_rain"],
+    14: ["rain", "morning_light_rain"],
+    17: ["rain", "morning_light_rain"],
+    20: ["rain", "morning_light_rain"],
+    29: ["rain", "morning_light_rain"],
+    31: ["rain", "morning_light_rain"],
+    32: ["rain", "morning_light_rain"],
+    38: ["rain", "morning_light_rain"],
+    39: ["rain", "morning_light_rain"],
+    12: ["sun_rain", "morning_light_rain"],
+    16: ["sun_rain", "morning_light_rain"],
+    19: ["sun_rain", "morning_light_rain"],
+    30: ["sun_rain", "morning_light_rain"],
+    15: ["thunderstorm", "heavy_rain"],
+    18: ["thunderstorm", "heavy_rain"],
+    21: ["thunderstorm", "heavy_rain"],
+    22: ["thunderstorm", "heavy_rain"],
+    33: ["thunderstorm", "heavy_rain"],
+    34: ["thunderstorm", "heavy_rain"],
+    35: ["thunderstorm", "heavy_rain"],
+    36: ["thunderstorm", "heavy_rain"],
+    41: ["thunderstorm", "heavy_rain"]
 };
 
 const countyIds={
@@ -65,16 +65,16 @@ const countyIds={
     "F-D0047-087":"金門縣",
 }
 
-  const hourInfo=document.querySelector(".hourInfo");
-  const countyId=document.getElementById("country-list");
-  countyId.addEventListener("change", getValue);
+const hourInfo=document.querySelector(".hourInfo");
+const countyId=document.getElementById("country-list");
+countyId.addEventListener("change", getValue);
   
-  function getValue(event){
-      const selectedValue=event.target.value;
-      locationName=countyIds[selectedValue];
-      hourInfo.innerHTML="";
-      fetchHourInfo(locationName);
-  }
+function getValue(event){
+    const selectedValue=event.target.value;
+    locationName=countyIds[selectedValue];
+    hourInfo.innerHTML="";
+    fetchHourInfo(locationName);
+}
 
 function fetchHourInfo(locationName){
     fetch(`https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-089?Authorization=${CWB_API_KEY}&locationName=${locationName}`).then((response)=>{
@@ -82,9 +82,12 @@ function fetchHourInfo(locationName){
     }).then((data)=>{
         hourInfoRecords=data.records;
         renderHourForecast();
-    });
+    })
+    .catch((error)=>{
+        console.error(error);
+    })
 }
- 
+
 function renderHourForecast(){
     const hourInfo=document.querySelector(".hourInfo");
 
@@ -116,7 +119,8 @@ function renderHourForecast(){
 
     //div內容
     TTimeDiv.innerText="現在";
-    const icon=iconData[weatherPatternValue];
+    const icon=iconAndImgData[weatherPatternValue][0];
+    console.log(icon)
     if (getHour<6 && icon==="sun_rain"){
         iconImg.src="./image/icon/moon_rain.png";
     }else if (getHour>=17 && getHour<=24 && icon==="sun_rain"){
@@ -131,6 +135,19 @@ function renderHourForecast(){
     // rain6hDDiv.innerText=rain6h+"%";
     TDiv.innerText=T+"°";
 
+    //設定背景圖
+    const backgroundImg=iconAndImgData[weatherPatternValue][1];
+    console.log(backgroundImg)
+    if (getHour<6 && backgroundImg==="morning_sun"){
+        document.documentElement.style.backgroundImage="url('../image/background/early_morning_sun.jpg')";
+    }else if (getHour>=16 && getHour<=18 && backgroundImg==="morning_sun"){
+        document.documentElement.style.backgroundImage="url('../image/background/evening_sun.jpg')";
+    }else if (getHour>=17 && getHour<=24 && backgroundImg==="morning_light_rain"){
+        document.documentElement.style.backgroundImage="url('../image/background/night_light_rain.jpg')";
+    }else{
+        document.documentElement.style.backgroundImage=`url('../image/background/${backgroundImg}.jpg')`;
+    }
+
     hourInfoContainer.appendChild(TTimeDiv);
     iconDiv.appendChild(iconImg);
     hourInfoContainer.appendChild(iconDiv);
@@ -138,6 +155,8 @@ function renderHourForecast(){
     hourInfoContainer.appendChild(TDiv);
 
     hourInfo.appendChild(hourInfoContainer);
+
+    //---------------------------------------------
 
     for (let i=1,j=3,k=1;i<15;i++,j+=3,k++){
         // 時間判斷
@@ -222,7 +241,7 @@ function renderHourForecast(){
 
         //div內容
         TTimeDiv.innerText=TTime;
-        const icon=iconData[weatherPatternValue];
+        const icon=iconAndImgData[weatherPatternValue][0];
         if (getHour<6 && icon==="sun_rain"){
             iconImg.src="./image/icon/moon_rain.png";
         }else if (getHour>=17 && getHour<=24 && icon==="sun_rain"){
@@ -237,6 +256,19 @@ function renderHourForecast(){
         // rain6hDDiv.innerText=rain6h+"%";
         TDiv.innerText=T+"°";
 
+        //設定背景圖
+        const backgroundImg=iconAndImgData[weatherPatternValue][1];
+        console.log(backgroundImg)
+        if (getHour<6 && backgroundImg==="morning_sun"){
+            document.documentElement.style.backgroundImage="url('../image/background/early_morning_sun.jpg')";
+        }else if (getHour>=16 && getHour<=18 && backgroundImg==="morning_sun"){
+            document.documentElement.style.backgroundImage="url('../image/background/evening_sun.jpg')";
+        }else if (getHour>=17 && getHour<=24 && backgroundImg==="morning_light_rain"){
+            document.documentElement.style.backgroundImage="url('../image/background/night_light_rain.jpg')";
+        }else{
+            document.documentElement.style.backgroundImage=`url('../image/background/${backgroundImg}.jpg')`;
+        }
+
         hourInfoContainer.appendChild(TTimeDiv);
         iconDiv.appendChild(iconImg);
         hourInfoContainer.appendChild(iconDiv);
@@ -248,15 +280,3 @@ function renderHourForecast(){
 }
 
 window.addEventListener("load", fetchHourInfo("臺北市"));
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    const town=document.querySelector(".blockSB__container");
-  
-    console.log(town); // HTMLButtonElement object
-  
-    //  Works as expected
-    town.addEventListener('click', () => {
-      alert('You clicked the button');
-    });
-});
