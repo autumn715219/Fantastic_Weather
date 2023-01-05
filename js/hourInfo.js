@@ -81,6 +81,7 @@ function fetchHourInfo(locationName){
 	    return response.json();
     }).then((data)=>{
         hourInfoRecords=data.records;
+        console.log(hourInfoRecords)
         renderHourForecast();
     })
     .catch((error)=>{
@@ -119,23 +120,30 @@ function renderHourForecast(){
 
     //div內容
     TTimeDiv.innerText="現在";
-    const icon=iconAndImgData[weatherPatternValue][0];
-    console.log(icon)
-    if (getHour<6 && icon==="sun_rain"){
-        iconImg.src="./image/icon/moon_rain.png";
-    }else if (getHour>=17 && getHour<=24 && icon==="sun_rain"){
-        iconImg.src="./image/icon/moon_rain.png";
-    }else if(getHour<6 && icon==="cloud"){
-        iconImg.src="./image/icon/moon_cloud.png";
-    }else if(getHour>=17 && getHour<=24 && icon==="cloud"){
-        iconImg.src="./image/icon/moon_cloud.png";
+    const icon=iconAndImgData[weatherPatternValue][0];  
+    if (getHour>=3 && getHour<6 && icon==="sun"){
+        iconImg.src="image/icon/sunrise.png";
+    }else if(getHour>=0 && getHour<3 && icon==="sun"){
+        iconImg.src="image/icon/moon.png";
+    }else if(getHour>=15 && getHour<18 && icon==="sun"){
+        iconImg.src="image/icon/sunset.png";
+    }else if(getHour>=18 && getHour<24 && icon==="sun"){
+        iconImg.src="image/icon/moon.png";
+    }else if(getHour<3 && icon==="cloud"){
+        iconImg.src="image/icon/moon_cloud.png";
+    }else if(getHour>=18 && getHour<24 && icon==="cloud"){
+        iconImg.src="image/icon/moon_cloud.png";
+    }else if(getHour<6 && icon==="sun_rain"){
+        iconImg.src="image/icon/moon_rain.png";
+    }else if(getHour>=18 && getHour<24 && icon==="sun_rain"){
+        iconImg.src="image/icon/moon_rain.png";
     }else{
-        iconImg.src=`./image/icon/${icon}.png`;
+        iconImg.src=`image/icon/${icon}.png`;
     }
     // rain6hDDiv.innerText=rain6h+"%";
     TDiv.innerText=T+"°";
 
-    //設定背景圖
+    //設定背景圖   
     const backgroundImg=iconAndImgData[weatherPatternValue][1];
     console.log(backgroundImg)
     if (getHour>=5 && getHour<9 && backgroundImg==="morning_sun"){
@@ -146,7 +154,8 @@ function renderHourForecast(){
         document.documentElement.style.backgroundImage="url('image/background/night.jpg')";
     }else if (getHour>=19 && getHour<24 && backgroundImg==="morning_partly_cloudy"){
         document.documentElement.style.backgroundImage="url('image/background/night_partly_cloudy.jpg')";
-
+    }else if (getHour>=19 && getHour<24 && backgroundImg==="morning_cloudy"){
+        document.documentElement.style.backgroundImage="url('image/background/night_cloudy.jpg')";
     }else if (getHour>=19 && getHour<24 && backgroundImg==="morning_light_rain"){
         document.documentElement.style.backgroundImage="url('image/background/night_light_rain.jpg')";
     }else{
@@ -247,16 +256,27 @@ function renderHourForecast(){
         //div內容
         TTimeDiv.innerText=TTime;
         const icon=iconAndImgData[weatherPatternValue][0];
-        if (getHour<6 && icon==="sun_rain"){
-            iconImg.src="./image/icon/moon_rain.png";
-        }else if (getHour>=17 && getHour<=24 && icon==="sun_rain"){
-            iconImg.src="./image/icon/moon_rain.png";
-        }else if(getHour<6 && icon==="cloud"){
-            iconImg.src="./image/icon/moon_cloud.png";
-        }else if(getHour>=17 && getHour<=24 && icon==="cloud"){
-            iconImg.src="./image/icon/moon_cloud.png";
+        let WxDate=hourInfoRecords.locations[0].location[0].weatherElement[1].time[i].startTime;
+        let WxDateValue=new Date(WxDate);
+        let WxHour=WxDateValue.getHours();
+        if (WxHour>=3 && WxHour<6 && icon==="sun"){
+            iconImg.src="image/icon/sunrise.png";
+        }else if(WxHour>=0 && WxHour<3 && icon==="sun"){
+            iconImg.src="image/icon/moon.png";
+        }else if(WxHour>=15 && WxHour<18 && icon==="sun"){
+            iconImg.src="image/icon/sunset.png";
+        }else if(WxHour>=18 && WxHour<24 && icon==="sun"){
+            iconImg.src="image/icon/moon.png";
+        }else if(WxHour<3 && icon==="cloud"){
+            iconImg.src="image/icon/moon_cloud.png";
+        }else if(WxHour>=18 && WxHour<24 && icon==="cloud"){
+            iconImg.src="image/icon/moon_cloud.png";
+        }else if(WxHour<6 && icon==="sun_rain"){
+            iconImg.src="image/icon/moon_rain.png";
+        }else if(WxHour>=18 && WxHour<24 && icon==="sun_rain"){
+            iconImg.src="image/icon/moon_rain.png";
         }else{
-            iconImg.src=`./image/icon/${icon}.png`;
+            iconImg.src=`image/icon/${icon}.png`;
         }
         // rain6hDDiv.innerText=rain6h+"%";
         TDiv.innerText=T+"°";
