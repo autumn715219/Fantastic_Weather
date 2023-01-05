@@ -130,15 +130,6 @@ body::-webkit-scrollbar-thumb {
   height: 40px;
   color: #414141;
   text-align: center;
-  transition: 0.4s ease;
-}
-.blockSB__select:focus {
-  transform: scale(1.07);
-  outline: none;
-  transition: 0.4s ease;
-}
-.blockSB__select > option {
-  background-color: #fff;
 }
 .blockSB__container {
   height: 60px;
