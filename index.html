@@ -11,12 +11,13 @@
 	</head>
 	<body>
 		<sideBar>
-			<div class="blockSB" id="loactions">
+			<div class="blockSB">
 				<select
 					id="country-list"
 					class="blockSB__select contentSB"
 					onchange="fetchData(this.value)"
 				></select>
+				<div id="loactions"></div>
 			</div>
 		</sideBar>
 		<main class="main">
@@ -41,6 +42,7 @@
 							<div class="byWeek__title infoBold">
 								7天天氣預測
 							</div>
+							<div id="weekForecast">123</div>
 						</div>
 						<div class="box UV">
 							<div class="UV__title infoBold">紫外線指數</div>
