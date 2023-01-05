@@ -304,7 +304,7 @@ function sevenDaysWeather(minT,maxT,Wx){
   let dateArry =[];
   let dataArry =[];
   let dataArry2 =[];
-  for (var i = 0; i < minT.length; i++) {
+  for (var i = 0; i < 13; i++) {
     let startTime = minT[i].startTime;
     let date = startTime.split(/\s+/);
     let dateValue = date[0];
@@ -319,20 +319,20 @@ function sevenDaysWeather(minT,maxT,Wx){
         'minT':data_minT,
         'maxT':data_maxT,
         'wx':data_wx
-      }
-      dateArry.push(dateValue)
-      dataArry.push(data)
+      };
+      dateArry.push(dateValue);
+      dataArry.push(data);
     }else{
       //第二筆資料
       //console.log(dateValue+'已在Arry')
-      let data2 = { 
-        'date':dateValue,
-        'week':getWeekName(dateValue),
-        'minT':data_minT,
-        'maxT':data_maxT,
-        'wx':data_wx
-      }
-      dataArry2.push(data2)
+      // let data2 = { 
+      //   'date':dateValue,
+      //   'week':getWeekName(dateValue),
+      //   'minT':data_minT,
+      //   'maxT':data_maxT,
+      //   'wx':data_wx
+      // };
+      // dataArry2.push(data2);
     }
     maxArry.push(Number(maxT[i].elementValue[0].value));
     minArry.push(Number(minT[i].elementValue[0].value));
@@ -340,27 +340,27 @@ function sevenDaysWeather(minT,maxT,Wx){
 
   let min = Math.min.apply(null, minArry);
   let max = Math.max.apply(null, maxArry);
-  // console.log(min,max) 最大最小值
+  //console.log(min,max) 最大最小值
   //console.log(dataArry) //比較array1
   //console.log(dataArry2) //比較array2
-  let rightTempArray = getRightTemp(dataArry,dataArry2);
-  //console.log(rightTempArray);
-  rightTempArray.forEach((item,i) => renderSevenDaate(item,i,min,max));
+  //let rightTempArray = getRightTemp(dataArry,dataArry2);
+  //console.log(dataArry);
+  dataArry.forEach((item,i) => renderSevenDaate(item,i,min,max));
 }
 
 function getRightTemp(array1,array2){
-  for (let i = 0; i < array1.length; i++) {
-      for( let j=0;  j < array2.length; j++){
-          if(array1[i].date == array2[i].date){
-              if(array1[i].minT > array2[j].minT){
-                array1[i].minT = array2[j].minT
-              }
-              if(array1[i].maxT < array2[j].maxT){
-                array1[i].maxT = array2[j].maxT
-              }
-          }
-      }
-  }
+  // for (let i = 0; i < array1.length; i++) {
+  //     for( let j=0;  j < array2.length; j++){
+  //         if(array1[i].date === array2[i].date){
+  //             if(array1[i].minT > array2[j].minT){
+  //               array1[i].minT = array2[j].minT
+  //             }
+  //             if(array1[i].maxT < array2[j].maxT){
+  //               array1[i].maxT = array2[j].maxT
+  //             }
+  //         }
+  //     }
+  //}
   return array1
 }
 
