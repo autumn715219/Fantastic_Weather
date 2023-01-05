@@ -71,8 +71,7 @@ async function fetchData(countryIds) {
 
 }
 
-//組出內容
-
+//組出左側選單內容
 const renderContent = (item,i) => {
   //console.log( i + item.locationName)
   let locationName = item.locationName; //地區
@@ -93,23 +92,23 @@ const renderContent = (item,i) => {
   loactionsWrp.insertAdjacentHTML("beforeend",htmlStr);
 };
 
-
+//組出7天天氣預測
 const renderSevenDaate = (item,i,min,max) => {
-  console.log (item,i,min,max)
+  //console.log (item,i,min,max)
   let range = max - min;
   let left = (item.minT - min)/range * 100 ;
   let leftValue = left.toFixed(2)+'%'
 
   let right = (max - item.maxT)/range * 100 ;
   let rightValue = right.toFixed(2) +'%';
-
+  let iconImg=iconSwitch(item.wx);
   const htmlStr = `<div class="dayInfo">
                       <div class="dayInfo__container">
                         <div class="dayInfo__date">${item.week}</div>
                         <div class="dayInfo__iconbox">
                           <img
                             class="dayInfo__icon"
-                            src="./image/icon/cloudy.png"
+                            src="./image/icon/${iconImg}.png"
                           />
                         </div>
                         <div class="tempBox">
@@ -126,8 +125,8 @@ const renderSevenDaate = (item,i,min,max) => {
                     sevendaysWrp.insertAdjacentHTML("beforeend",htmlStr);
 };
 
+//左側選單點擊事件
 function locationCardLoad(arry){
-
   let locationCards = document.getElementsByClassName('blockSB__container');
   for (var i = 0; i < locationCards.length; i++) {
       let self = locationCards[i];
@@ -140,11 +139,16 @@ function locationCardLoad(arry){
   }
 }
 
+//組出右側內容
 function renderCard(item){
-  console.log(item.weatherElement)
+  //console.log(item.weatherElement)
   // headline__area
   let locationName = item.locationName; //地區
   let locationWx = item.weatherElement[6].time[0].elementValue[0].value; //天氣現象
+  let locationWxtext = Number(item.weatherElement[6].time[0].elementValue[1].value); //天氣現象碼
+  let now =new Date();
+  let time = now.getHours();
+  let background = getImgBackground(time,locationWxtext);
   let locationT = item.weatherElement[1].time[0].elementValue[0].value; //平均溫度
   let locationMinT = item.weatherElement[8].time[0].elementValue[0].value; //最低溫度
   let locationMaxT = item.weatherElement[12].time[0].elementValue[0].value; //最高溫度
@@ -153,6 +157,8 @@ function renderCard(item){
   let tempTitle = document.querySelector('.headline__temp.tempTitle');
   let condition = document.querySelector('.headline__condition.content');
   let subtemp = document.querySelector('.headline__subtemp.content');
+  let html = document.querySelector('html');
+  html.style.backgroundImage = `url(image/background/${background})`
   areaTitle.textContent = locationName;
   tempTitle.textContent = locationT +'°';
   condition.textContent = locationWx;
@@ -198,7 +204,8 @@ function renderCard(item){
   // 7days forecast
   let locationMinT_List = item.weatherElement[8].time; //最低溫度
   let locationMaxT_List = item.weatherElement[12].time; //最高溫度
-  sevenDaysWeather(locationMinT_List,locationMaxT_List);
+  let locationWxText = item.weatherElement[6].time;
+  sevenDaysWeather(locationMinT_List,locationMaxT_List,locationWxText);
 }
 
 function calcUVISwitch(UVI){
@@ -218,6 +225,21 @@ function calcUVISwitch(UVI){
   }
 }
 
+function iconSwitch(code){
+  let myCode=Number(code)
+  let sun = [1];
+  let cloud = [4,5,6,7,24,25,26,27,28];
+  let rain = [8,9,10,11,13,14,17,20,29,31,32,38,39];
+  let cloudy = [2,3];
+  let sun_rain=[12,16,19,30];
+  let thunderstorm =[15,18,21,22,33,34,35,36,41];
+  if(sun.includes(myCode)){ return "sun";}
+  if(cloud.includes(myCode)){ return "cloud";}
+  if(rain.includes(myCode)){ return "rain";}
+  if(cloudy.includes(myCode)){ return "cloudy";}
+  if(sun_rain.includes(myCode)){ return "sun_rain";}
+}
+
 function calcATInfo(T,AT){
   let Tem = Number(T); //實際溫度
   let ATem = Number(AT); //體感溫度
@@ -230,8 +252,52 @@ function calcATInfo(T,AT){
     return "與實際氣溫接近。"
   }
 }
-
-function sevenDaysWeather(minT,maxT){
+function getImgBackground(time,code){
+  let sun = [1,24];
+  let cloud = [2,3,4,25,26,27,31,36,37];
+  let cloudy = [5,6,7,28,32];
+  let dark_cloudy = [8,19];
+  let small_rain=[9,10,11,12,13,14,29,30,38,39,41];
+  let heavy_rain=[15,16,17];
+  let thunderstorm =[18,21,22,33,34,35];
+  //let snow =[23,42];
+  if(sun.includes(code)){
+    if( 0<=time<5){ return 'night.jpg' }
+    if( 5<=time<9){ return 'early_morning_sun.jpg' }
+    if( 9<=time<16){ return 'morning_sun.jpg' }
+    if( 16<=time<19){ return 'evening_sun.jpg' }
+    if( 19<=time<24){ return 'night.jpg' }
+  }
+  if(cloud.includes(code)){
+    if( 0<=time<5){ return 'night_partly_cloudy.jpg' }
+    if( 5<=time<9){ return 'early_morning_sun.jpg' }
+    if( 9<=time<16){ return 'morning_partly_cloudy.jpg' }
+    if( 16<=time<19){ return 'evening_sun.jpg' }
+    if( 19<=time<24){ return 'night_partly_cloudy.jpg' }
+  }
+  if(cloudy.includes(code)){
+    if( 0<=time<5){ return 'night_cloudy.jpg' }
+    if( 5<=time<19){ return 'morning_cloudy.jpg' }
+    if( 19<=time<24){ return 'night_cloudy.jpg' }
+  }
+  if(dark_cloudy.includes(code)){
+    if( 0<=time<5){ return 'night_cloudy.jpg' }
+    if( 5<=time<19){ return 'morining_dark_cloudy.jpg' }
+    if( 19<=time<24){ return 'night_cloudy.jpg' }
+  }
+  if(small_rain.includes(code)){
+    if( 0<=time<5){ return 'night_light_rain.jpg' }
+    if( 5<=time<19){ return 'morning_light_rain.jpg' }
+    if( 19<=time<24){ return 'night_light_rain.jpg' }
+  }
+  if(heavy_rain.includes(code)){
+    return 'heavy_rain.jpg'
+  }
+  if(thunderstorm.includes(code)){
+    return 'thunder.jpg'
+  }
+}
+function sevenDaysWeather(minT,maxT,Wx){
   // console.log(minT)
   let minArry =[];
   let maxArry =[];
@@ -244,6 +310,7 @@ function sevenDaysWeather(minT,maxT){
     let dateValue = date[0];
     let data_maxT = Number(maxT[i].elementValue[0].value);
     let data_minT = Number(minT[i].elementValue[0].value);
+    let data_wx = Wx[i].elementValue[1].value;
     if( !dateArry.includes(dateValue) ){
       //第一筆資料
       let data = { 
@@ -251,6 +318,7 @@ function sevenDaysWeather(minT,maxT){
         'week':getWeekName(dateValue),
         'minT':data_minT,
         'maxT':data_maxT,
+        'wx':data_wx
       }
       dateArry.push(dateValue)
       dataArry.push(data)
@@ -262,6 +330,7 @@ function sevenDaysWeather(minT,maxT){
         'week':getWeekName(dateValue),
         'minT':data_minT,
         'maxT':data_maxT,
+        'wx':data_wx
       }
       dataArry2.push(data2)
     }
@@ -275,7 +344,7 @@ function sevenDaysWeather(minT,maxT){
   //console.log(dataArry) //比較array1
   //console.log(dataArry2) //比較array2
   let rightTempArray = getRightTemp(dataArry,dataArry2);
-  console.log(rightTempArray);
+  //console.log(rightTempArray);
   rightTempArray.forEach((item,i) => renderSevenDaate(item,i,min,max));
 }
 
@@ -294,12 +363,13 @@ function getRightTemp(array1,array2){
   }
   return array1
 }
+
 function getWeekName(date){
   let now =new Date().getDate();
   let weekname=new Date(date);
   let mydate=weekname.getDate();
   let n = weekname.getDay();
-  if (now === mydate){ n=8}
+  if (now === mydate){ n=8 };
   switch (n) {
     default:  return '今天';
     case 0: return '週日';
