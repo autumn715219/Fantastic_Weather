@@ -49,7 +49,7 @@
 }
 html {
   background: no-repeat center center fixed;
-  background-image: url("../image/background/night_partly_cloudy.jpg");
+  background-image: url("../image/background/morning_partly_cloudy.jpg");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -60,6 +60,19 @@ html {
 *:before,
 *:after {
   box-sizing: inherit;
+}
+body {
+  scrollbar-gutter: stable both-edges;
+}
+body::-webkit-scrollbar {
+  width: 8px;
+}
+body::-webkit-scrollbar-track {
+  background: none;
+}
+body::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.3);
+  border-radius: 10px;
 }
 .hamburgerBox {
   width: 100%;
@@ -92,9 +105,20 @@ html {
   padding: 20px;
   -webkit-backdrop-filter: saturate(100%) blur(20px);
   backdrop-filter: saturate(100%) blur(20px);
-  background-color: rgba(240,235,232,0.9);
+  background-color: rgba(240,235,232,0.8);
   overflow-y: auto;
   z-index: 1;
+  scrollbar-gutter: stable;
+}
+.blockSB::-webkit-scrollbar {
+  width: 8px;
+}
+.blockSB::-webkit-scrollbar-track {
+  background: none;
+}
+.blockSB::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.2);
+  border-radius: 10px;
 }
 .blockSB__select {
   margin-top: 20px;
@@ -106,6 +130,15 @@ html {
   height: 40px;
   color: #414141;
   text-align: center;
+  transition: 0.4s ease;
+}
+.blockSB__select:focus {
+  transform: scale(1.07);
+  outline: none;
+  transition: 0.4s ease;
+}
+.blockSB__select > option {
+  background-color: #fff;
 }
 .blockSB__container {
   height: 60px;
@@ -214,7 +247,7 @@ html {
   border-radius: 10px;
   -webkit-backdrop-filter: saturate(100%) blur(20px);
   backdrop-filter: saturate(100%) blur(20px);
-  background-color: rgba(0,0,0,0.09);
+  background-color: rgba(0,0,0,0.1);
 }
 .byHour {
   grid-area: block1;
@@ -222,6 +255,17 @@ html {
   flex-wrap: wrap;
   overflow-x: auto;
   padding-left: 20px;
+  scrollbar-gutter: stable both-edges;
+}
+.byHour::-webkit-scrollbar {
+  height: 8px;
+}
+.byHour::-webkit-scrollbar-track {
+  background: none;
+}
+.byHour::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.2);
+  border-radius: 8px;
 }
 .byHour__title {
   color: #fff;
@@ -340,7 +384,7 @@ html {
   position: relative;
 }
 .UV__title {
-  height: 30px;
+  height: 20px;
   width: 100%;
   display: flex;
   align-items: center;
@@ -386,7 +430,7 @@ html {
   position: relative;
 }
 .humidity__title {
-  height: 30px;
+  height: 20px;
   width: 100%;
   display: flex;
   align-items: center;
@@ -407,7 +451,7 @@ html {
   position: relative;
 }
 .apparentTemp__title {
-  height: 30px;
+  height: 20px;
   width: 100%;
   display: flex;
   align-items: center;
@@ -428,7 +472,7 @@ html {
   position: relative;
 }
 .conclusion__title {
-  height: 30px;
+  height: 20px;
   width: 100%;
   display: flex;
   align-items: center;
@@ -441,17 +485,24 @@ html {
 }
 @media (max-width: 1200px) {
   .areaInfo__container {
-    grid-template-columns: 180px 180px;
-    grid-template-rows: 180px 180px 180px 180px 180px;
+    grid-template-columns: 150px 150px;
+    grid-template-rows: 150px 150px 150px 150px 150px;
     grid-gap: 20px;
     grid-template-areas: "block1 block1" "block2 block2" "block2 block2" "block3 block4" "block5 block6";
     justify-content: center;
   }
-  .blockSB {
-    width: 200px;
+  .dayInfo__container {
+    height: 38px;
   }
-  .mainBlock {
-    padding-left: 200px;
+  .dayInfo__iconbox {
+    width: 20px;
+    height: 20px;
+  }
+  .UVBox {
+    margin: 10px 0 10px 0;
+  }
+  .humidity__info {
+    margin-top: 34px;
   }
 }
 @media (max-width: 600px) {
@@ -468,23 +519,6 @@ html {
   }
   .mainBlock {
     padding-left: 0;
-  }
-  .areaInfo__container {
-    grid-template-columns: 150px 150px;
-    grid-template-rows: 150px 150px 150px 150px 150px;
-  }
-  .dayInfo__container {
-    height: 38px;
-  }
-  .dayInfo__iconbox {
-    width: 20px;
-    height: 20px;
-  }
-  .UVBox {
-    margin: 10px 0 10px 0;
-  }
-  .humidity__info {
-    margin-top: 44px;
   }
 }
 @-moz-keyframes slideIn {
