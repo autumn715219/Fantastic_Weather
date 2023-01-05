@@ -138,11 +138,16 @@ function renderHourForecast(){
     //設定背景圖
     const backgroundImg=iconAndImgData[weatherPatternValue][1];
     console.log(backgroundImg)
-    if (getHour<6 && backgroundImg==="morning_sun"){
+    if (getHour>=5 && getHour<9 && backgroundImg==="morning_sun"){
         document.documentElement.style.backgroundImage="url('../image/background/early_morning_sun.jpg')";
-    }else if (getHour>=16 && getHour<=18 && backgroundImg==="morning_sun"){
+    }else if (getHour>=16 && getHour<19 && backgroundImg==="morning_sun"){
         document.documentElement.style.backgroundImage="url('../image/background/evening_sun.jpg')";
-    }else if (getHour>=17 && getHour<=24 && backgroundImg==="morning_light_rain"){
+    }else if (getHour>=19 && getHour<24 && backgroundImg==="morning_sun"){
+        document.documentElement.style.backgroundImage="url('../image/background/night.jpg')";
+    }else if (getHour>=19 && getHour<24 && backgroundImg==="morning_partly_cloudy"){
+        document.documentElement.style.backgroundImage="url('../image/background/night_partly_cloudy.jpg')";
+
+    }else if (getHour>=19 && getHour<24 && backgroundImg==="morning_light_rain"){
         document.documentElement.style.backgroundImage="url('../image/background/night_light_rain.jpg')";
     }else{
         document.documentElement.style.backgroundImage=`url('../image/background/${backgroundImg}.jpg')`;
@@ -255,19 +260,6 @@ function renderHourForecast(){
         }
         // rain6hDDiv.innerText=rain6h+"%";
         TDiv.innerText=T+"°";
-
-        //設定背景圖
-        const backgroundImg=iconAndImgData[weatherPatternValue][1];
-        console.log(backgroundImg)
-        if (getHour<6 && backgroundImg==="morning_sun"){
-            document.documentElement.style.backgroundImage="url('../image/background/early_morning_sun.jpg')";
-        }else if (getHour>=16 && getHour<=18 && backgroundImg==="morning_sun"){
-            document.documentElement.style.backgroundImage="url('../image/background/evening_sun.jpg')";
-        }else if (getHour>=17 && getHour<=24 && backgroundImg==="morning_light_rain"){
-            document.documentElement.style.backgroundImage="url('../image/background/night_light_rain.jpg')";
-        }else{
-            document.documentElement.style.backgroundImage=`url('../image/background/${backgroundImg}.jpg')`;
-        }
 
         hourInfoContainer.appendChild(TTimeDiv);
         iconDiv.appendChild(iconImg);
