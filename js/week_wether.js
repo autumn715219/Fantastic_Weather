@@ -22,57 +22,47 @@ async function getData(countryName){
             } 
             else if ( j.elementName == 'MinAT') {//最低體感溫度
                 const MinAT=j.time
-                let i,k;
                 const temBoxLow= document.querySelectorAll(".tempBox__low")
+                let k = 0;
+
                 if (MinAT.length == 15 ){
-                    i = 1;
-                    k = 0;
                     temBoxLow[0].innerHTML = MinAT[0].elementValue[0].value + "°";
                     minATWeek = MinAT[0].elementValue[0].value;
-                } else {
-                    i = 0;
-                    k = -1;
+                    k = 1;
+                    MinAT.shift();
                 }
             
-                for(;i<MinAT.length-1;i++){
-                    if(temBoxLow[k].innerHTML > MinAT[i].elementValue[0].value + "°"){
+                for(let i=0;i<MinAT.length;i++){
+                    if (i%2==0) {
                         temBoxLow[k].innerHTML = MinAT[i].elementValue[0].value + "°"
-                    }else if( temBoxLow[k].innerHTML == ''){
-                        temBoxLow[k].innerHTML = MinAT[i].elementValue[0].value + "°"
+                    } else {
+                        if (temBoxLow[k].innerHTML > MinAT[i].elementValue[0].value) temBoxLow[k].innerHTML = MinAT[i].elementValue[0].value + "°"
+                        k++;     
                     }
-                    
+         
                     if (minATWeek >= MinAT[i].elementValue[0].value) minATWeek = MinAT[i].elementValue[0].value
-                    if (i%2==0){
-                        k++;
-                    } 
                 }
             } else if ( j.elementName == 'MaxAT') {//最高體感溫度
-                const MaxAT=j.time
-                const temBoxHigh= document.querySelectorAll(".tempBox__high")
-                let i,k;
-                
+                const MaxAT = j.time
+                const temBoxHigh = document.querySelectorAll(".tempBox__high")
+                let k=0;
                 if (MaxAT.length == 15 ){
-                    i = 1;
-                    k = 0;
                     temBoxHigh[0].innerHTML = MaxAT[0].elementValue[0].value + "°";
                     maxATWeek = MaxAT[0].elementValue[0].value;
-                } else {
-                    i = 0;
-                    k = -1;
+                    k = 1;
+                    MaxAT.shift();
                 }
             
-                for(;i<MaxAT.length-1;i++){
-                    if(temBoxHigh[k].innerHTML < MaxAT[i].elementValue[0].value){
+                for(let i=0;i<MaxAT.length;i++){
+                    if (i%2==0) {
                         temBoxHigh[k].innerHTML = MaxAT[i].elementValue[0].value + "°"
-                    }else if( temBoxHigh[k].innerHTML == ''){
-                        temBoxHigh[k].innerHTML = MaxAT[i].elementValue[0].value + "°"
+                    } else {
+                        if (temBoxHigh[k].innerHTML < MaxAT[i].elementValue[0].value) temBoxHigh[k].innerHTML = MaxAT[i].elementValue[0].value + "°"
+                        k++;     
                     }
 
                     if (maxATWeek < MaxAT[i].elementValue[0].value) maxATWeek = MaxAT[i].elementValue[0].value
-
-                    if (i%2==0){
-                        k++;
-                    } 
+                    
                 }
             } else if ( j.elementName == 'Wx') { //天氣氣象
                 let weekWeather=[]
@@ -122,14 +112,13 @@ async function getData(countryName){
                 }else if(nextUVI>10){
                     uvInfo.innerText="接下來的時間皆為危險級"
                 }
-            }else if ( j.elementName == 'Td') {//平均露點溫度
+            } else if ( j.elementName == 'Td') {//平均露點溫度
                 const Td=j.time
                 let humidity__info=document.querySelector(".humidity__info")
                 humidity__info.innerText=`平均露點溫度為${Td[0].elementValue[0].value}`
             }
             
         }
-        console.log(maxATWeek,minATWeek)
         //變更週
         let now = new Date()
         const day1 =now.getDay();
