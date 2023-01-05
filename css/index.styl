@@ -2,7 +2,7 @@
 
 html
 	background: no-repeat center center fixed;
-	background-image: url('../image/background/morning_sun.jpg') 
+	background-image: url('../image/background/night_partly_cloudy.jpg') 
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -185,7 +185,7 @@ blockTitle()
 	border-radius: 10px
 	-webkit-backdrop-filter:saturate(100%) blur(20px);  //for safari
 	backdrop-filter: saturate(100%) blur(20px)
-	background-color: rgba(128, 128, 128, 0.08)
+	background-color: rgba(0, 0, 0, 0.09)
 
 .byHour
 	grid-area: block1;
@@ -282,6 +282,15 @@ blockTitle()
 	display: flex
 	align-items: center
 	justify-content: space-between
+	width: 170px
+	
+	&__low
+		width: 25px
+		text-align: right
+
+	&__high
+		width: 25px
+		text-align: right
 
 	&__barBG
 		width: 100px
@@ -289,12 +298,17 @@ blockTitle()
 		border-radius: 5px
 		margin: 0 10px 0 10px
 		background-color: rgba(0, 0, 0, 0.2)
+		position: relative
+		
+		
 
 	&__bar
 		width: 100%
 		height: 5px
 		background: linear-gradient(90deg, rgba(34,193,195,1) 0%, rgba(255,179,14,1) 100%);
 		border-radius: 5px
+		position: absolute
+		
 
 
 .UV
@@ -320,9 +334,11 @@ blockTitle()
 	&__bar
 		width: 100%
 		height: 5px
-		background: linear-gradient(90deg, rgba(107,215,57,1) 0%, rgba(255,197,9,1) 26%, rgba(255,135,29,1) 46%, rgba(252,57,102,1) 72%, rgba(136,74,179,1) 100%);
+		background: linear-gradient(90deg, rgba(101,235,39,1) 0%, rgba(255,215,9,1) 25%, rgba(255,135,29,1) 50%, rgba(255,16,71,1) 75%, rgba(136,74,179,1) 100%);
 		border-radius: 5px
 		position: relative
+
+
 
 	&__point
 		height: 10px
