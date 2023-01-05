@@ -4,21 +4,20 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>雨量觀測</title>
-		<!-- 建立整體樣式指導：基礎字型、字體、基底色、標題、段落樣式等等 -->
+		<title>天氣</title>
 		<link rel="stylesheet" type="text/css" href="css/reset.css" />
 		<link rel="stylesheet" type="text/css" href="css/common.css" />
-		<link rel="stylesheet" type="text/css" href="css/sidebar.css" />
-
-		<!-- 建立雨量觀測部份的樣式 -->
-		<link rel="stylesheet" type="text/css" href="css/raining.css" />
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
 	</head>
 	<body>
 		<sideBar>
-			<div class="blockSB" id="loactions">
+			<div class="blockSB">
+				<div class="closeBox">
+					<img class="close" src="./image/icon/close.png" />
+				</div>
 				<select
 					id="country-list"
-					class="blockSB__select"
+					class="blockSB__select contentSB"
 					onchange="fetchData(this.value)"
 				>
 					<option>請選擇你最愛的寵物</option>
@@ -29,107 +28,112 @@
 					<option>Spider</option>
 					<option>Goldfish</option>
 				</select>
-				<div class="blockSB__container">
-					<div class="blockSB__area areaTitleSB">頭份鎮</div>
-					<div class="blockSB__condition contentSB">多雲時晴</div>
-					<div class="blockSB__temp tempTitleSB">17°</div>
-					<div class="blockSB__subTemp contentSB">
-						最高21° 最低17°
+				<div id="loactions">
+					<div class="blockSB__container">
+						<div class="blockSB__area areaTitleSB">頭份鎮</div>
+						<div class="blockSB__condition contentSB">多雲時晴</div>
+						<div class="blockSB__temp tempTitleSB">17°</div>
+						<div class="blockSB__subTemp contentSB">
+							最高21° 最低17°
+						</div>
 					</div>
-				</div>
-				<hr class="blockSB__hr" />
-				<div class="blockSB__container">
-					<div class="blockSB__area areaTitleSB">頭份鎮</div>
-					<div class="blockSB__condition contentSB">多雲時晴</div>
-					<div class="blockSB__temp tempTitleSB">17°</div>
-					<div class="blockSB__subTemp contentSB">
-						最高21° 最低17°
+					<hr class="blockSB__hr" />
+					<div class="blockSB__container">
+						<div class="blockSB__area areaTitleSB">頭份鎮</div>
+						<div class="blockSB__condition contentSB">多雲時晴</div>
+						<div class="blockSB__temp tempTitleSB">17°</div>
+						<div class="blockSB__subTemp contentSB">
+							最高21° 最低17°
+						</div>
 					</div>
-				</div>
-				<hr class="blockSB__hr" />
-				<div class="blockSB__container">
-					<div class="blockSB__area areaTitleSB">新北市</div>
-					<div class="blockSB__condition contentSB">毛毛雨</div>
-					<div class="blockSB__temp tempTitleSB">23°</div>
-					<div class="blockSB__subTemp contentSB">
-						最高21° 最低17°
+					<hr class="blockSB__hr" />
+					<div class="blockSB__container">
+						<div class="blockSB__area areaTitleSB">新北市</div>
+						<div class="blockSB__condition contentSB">毛毛雨</div>
+						<div class="blockSB__temp tempTitleSB">23°</div>
+						<div class="blockSB__subTemp contentSB">
+							最高21° 最低17°
+						</div>
 					</div>
-				</div>
-				<hr class="blockSB__hr" />
-				<div class="blockSB__container">
-					<div class="blockSB__area areaTitleSB">新北市</div>
-					<div class="blockSB__condition contentSB">毛毛雨</div>
-					<div class="blockSB__temp tempTitleSB">23°</div>
-					<div class="blockSB__subTemp contentSB">
-						最高21° 最低17°
+					<hr class="blockSB__hr" />
+					<div class="blockSB__container">
+						<div class="blockSB__area areaTitleSB">新北市</div>
+						<div class="blockSB__condition contentSB">毛毛雨</div>
+						<div class="blockSB__temp tempTitleSB">23°</div>
+						<div class="blockSB__subTemp contentSB">
+							最高21° 最低17°
+						</div>
 					</div>
-				</div>
-				<hr class="blockSB__hr" />
-				<div class="blockSB__container">
-					<div class="blockSB__area areaTitleSB">新北市</div>
-					<div class="blockSB__condition contentSB">毛毛雨</div>
-					<div class="blockSB__temp tempTitleSB">23°</div>
-					<div class="blockSB__subTemp contentSB">
-						最高21° 最低17°
+					<hr class="blockSB__hr" />
+					<div class="blockSB__container">
+						<div class="blockSB__area areaTitleSB">新北市</div>
+						<div class="blockSB__condition contentSB">毛毛雨</div>
+						<div class="blockSB__temp tempTitleSB">23°</div>
+						<div class="blockSB__subTemp contentSB">
+							最高21° 最低17°
+						</div>
 					</div>
-				</div>
-				<hr class="blockSB__hr" />
-				<div class="blockSB__container">
-					<div class="blockSB__area areaTitleSB">新北市</div>
-					<div class="blockSB__condition contentSB">毛毛雨</div>
-					<div class="blockSB__temp tempTitleSB">23°</div>
-					<div class="blockSB__subTemp contentSB">
-						最高21° 最低17°
+					<hr class="blockSB__hr" />
+					<div class="blockSB__container">
+						<div class="blockSB__area areaTitleSB">新北市</div>
+						<div class="blockSB__condition contentSB">毛毛雨</div>
+						<div class="blockSB__temp tempTitleSB">23°</div>
+						<div class="blockSB__subTemp contentSB">
+							最高21° 最低17°
+						</div>
 					</div>
-				</div>
-				<hr class="blockSB__hr" />
-				<div class="blockSB__container">
-					<div class="blockSB__area areaTitleSB">新北市</div>
-					<div class="blockSB__condition contentSB">毛毛雨</div>
-					<div class="blockSB__temp tempTitleSB">23°</div>
-					<div class="blockSB__subTemp contentSB">
-						最高21° 最低17°
+					<hr class="blockSB__hr" />
+					<div class="blockSB__container">
+						<div class="blockSB__area areaTitleSB">新北市</div>
+						<div class="blockSB__condition contentSB">毛毛雨</div>
+						<div class="blockSB__temp tempTitleSB">23°</div>
+						<div class="blockSB__subTemp contentSB">
+							最高21° 最低17°
+						</div>
 					</div>
-				</div>
-				<hr class="blockSB__hr" />
-				<div class="blockSB__container">
-					<div class="blockSB__area areaTitleSB">新北市</div>
-					<div class="blockSB__condition contentSB">毛毛雨</div>
-					<div class="blockSB__temp tempTitleSB">23°</div>
-					<div class="blockSB__subTemp contentSB">
-						最高21° 最低17°
+					<hr class="blockSB__hr" />
+					<div class="blockSB__container">
+						<div class="blockSB__area areaTitleSB">新北市</div>
+						<div class="blockSB__condition contentSB">毛毛雨</div>
+						<div class="blockSB__temp tempTitleSB">23°</div>
+						<div class="blockSB__subTemp contentSB">
+							最高21° 最低17°
+						</div>
 					</div>
-				</div>
-				<hr class="blockSB__hr" />
-				<div class="blockSB__container">
-					<div class="blockSB__area areaTitleSB">新北市</div>
-					<div class="blockSB__condition contentSB">毛毛雨</div>
-					<div class="blockSB__temp tempTitleSB">23°</div>
-					<div class="blockSB__subTemp contentSB">
-						最高21° 最低17°
+					<hr class="blockSB__hr" />
+					<div class="blockSB__container">
+						<div class="blockSB__area areaTitleSB">新北市</div>
+						<div class="blockSB__condition contentSB">毛毛雨</div>
+						<div class="blockSB__temp tempTitleSB">23°</div>
+						<div class="blockSB__subTemp contentSB">
+							最高21° 最低17°
+						</div>
 					</div>
-				</div>
-				<hr class="blockSB__hr" />
-				<div class="blockSB__container">
-					<div class="blockSB__area areaTitleSB">新北市</div>
-					<div class="blockSB__condition contentSB">毛毛雨</div>
-					<div class="blockSB__temp tempTitleSB">23°</div>
-					<div class="blockSB__subTemp contentSB">
-						最高21° 最低17°
+					<hr class="blockSB__hr" />
+					<div class="blockSB__container">
+						<div class="blockSB__area areaTitleSB">新北市</div>
+						<div class="blockSB__condition contentSB">毛毛雨</div>
+						<div class="blockSB__temp tempTitleSB">23°</div>
+						<div class="blockSB__subTemp contentSB">
+							最高21° 最低17°
+						</div>
 					</div>
-				</div>
-				<hr class="blockSB__hr" />
-				<div class="blockSB__container">
-					<div class="blockSB__area areaTitleSB">新北市</div>
-					<div class="blockSB__condition contentSB">毛毛雨</div>
-					<div class="blockSB__temp tempTitleSB">23°</div>
-					<div class="blockSB__subTemp contentSB">
-						最高21° 最低17°
+					<hr class="blockSB__hr" />
+					<div class="blockSB__container">
+						<div class="blockSB__area areaTitleSB">新北市</div>
+						<div class="blockSB__condition contentSB">毛毛雨</div>
+						<div class="blockSB__temp tempTitleSB">23°</div>
+						<div class="blockSB__subTemp contentSB">
+							最高21° 最低17°
+						</div>
 					</div>
 				</div>
 			</div>
 		</sideBar>
-		<main>
+		<main class="main">
+			<div class="hamburgerBox">
+				<img class="hamburger" src="./image/icon/hamburger.png" />
+			</div>
 			<div class="mainBlock">
 				<div class="headline">
 					<div class="headline__container">
@@ -149,7 +153,7 @@
 							</div>
 							<div class="hourInfo">
 								<div class="hourInfo__container">
-									<div class="hourInfo__time infobold">
+									<div class="hourInfo__time infoBold">
 										下午11時
 									</div>
 									<div class="hourInfo__iconBox">
@@ -163,7 +167,7 @@
 									</div>
 								</div>
 								<div class="hourInfo__container">
-									<div class="hourInfo__time infobold">
+									<div class="hourInfo__time infoBold">
 										下午11時
 									</div>
 									<div class="hourInfo__iconBox">
@@ -177,7 +181,7 @@
 									</div>
 								</div>
 								<div class="hourInfo__container">
-									<div class="hourInfo__time infobold">
+									<div class="hourInfo__time infoBold">
 										下午11時
 									</div>
 									<div class="hourInfo__iconBox">
@@ -191,7 +195,7 @@
 									</div>
 								</div>
 								<div class="hourInfo__container">
-									<div class="hourInfo__time infobold">
+									<div class="hourInfo__time infoBold">
 										下午11時
 									</div>
 									<div class="hourInfo__iconBox">
@@ -205,7 +209,7 @@
 									</div>
 								</div>
 								<div class="hourInfo__container">
-									<div class="hourInfo__time infobold">
+									<div class="hourInfo__time infoBold">
 										下午11時
 									</div>
 									<div class="hourInfo__iconBox">
@@ -219,7 +223,7 @@
 									</div>
 								</div>
 								<div class="hourInfo__container">
-									<div class="hourInfo__time infobold">
+									<div class="hourInfo__time infoBold">
 										下午11時
 									</div>
 									<div class="hourInfo__iconBox">
@@ -233,7 +237,7 @@
 									</div>
 								</div>
 								<div class="hourInfo__container">
-									<div class="hourInfo__time infobold">
+									<div class="hourInfo__time infoBold">
 										下午11時
 									</div>
 									<div class="hourInfo__iconBox">
@@ -247,7 +251,7 @@
 									</div>
 								</div>
 								<div class="hourInfo__container">
-									<div class="hourInfo__time infobold">
+									<div class="hourInfo__time infoBold">
 										下午11時
 									</div>
 									<div class="hourInfo__iconBox">
@@ -261,7 +265,7 @@
 									</div>
 								</div>
 								<div class="hourInfo__container">
-									<div class="hourInfo__time infobold">
+									<div class="hourInfo__time infoBold">
 										下午11時
 									</div>
 									<div class="hourInfo__iconBox">
@@ -275,7 +279,7 @@
 									</div>
 								</div>
 								<div class="hourInfo__container">
-									<div class="hourInfo__time infobold">
+									<div class="hourInfo__time infoBold">
 										下午11時
 									</div>
 									<div class="hourInfo__iconBox">
@@ -289,7 +293,7 @@
 									</div>
 								</div>
 								<div class="hourInfo__container">
-									<div class="hourInfo__time infobold">
+									<div class="hourInfo__time infoBold">
 										下午11時
 									</div>
 									<div class="hourInfo__iconBox">
@@ -448,12 +452,33 @@
 								</div>
 							</div>
 							<div class="UV__info info">
+								接下來的時間皆爲低量級。接下來的時間皆爲低量級。
+							</div>
+						</div>
+						<div class="box humidity">
+							<div class="humidity__title infoBold">溼度</div>
+							<div class="humidity__num digitMedium">100%</div>
+							<div class="humidity__info info">
 								接下來的時間皆爲低量級。
 							</div>
 						</div>
-						<div class="box humidity"></div>
-						<div class="box apparentTemp"></div>
-						<div class="box conclusion"></div>
+						<div class="box apparentTemp">
+							<div class="apparentTemp__title infoBold">
+								體感溫度
+							</div>
+							<div class="apparentTemp__num digitMedium">15°</div>
+							<div class="apparentTemp__info info">
+								與實際氣溫接近。
+							</div>
+						</div>
+						<div class="box conclusion">
+							<div class="conclusion__title infoBold">
+								綜合描述
+							</div>
+							<div class="conclusion__info info">
+								可能會下雨可能會出太陽可能會打雷可能會下雪
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -464,5 +489,6 @@
 			const CWB_API_KEY = "CWB-25142137-EFE4-4F9E-9B46-D41BF5BD73D5";
 		</script>
 		<script src="js/raining.js"></script>
+		<script src="js/sidebar.js"></script>
 	</body>
 </html>

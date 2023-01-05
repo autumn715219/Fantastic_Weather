@@ -1,7 +1,8 @@
 @import "./common.styl"
 
 html
-	background: url('../image/background/clear_night.jpg') no-repeat center center fixed;
+	background: no-repeat center center fixed;
+	background-image: url('../image/background/morning_sun.jpg') 
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -12,28 +13,76 @@ html
   box-sizing: inherit;
 }
 
-textCenter(){
+textCenter()
 	width: 100%
 	text-align: center
 	display: inline-block
 	text-shadow: 2px 2px 10px rgba(0, 0 , 0, 0.6)
 
-}
+blockDefault()
+	color: #fff
+	padding: 10px
+	position: relative
+
+blockTitle()
+	height: 30px
+	width: 100%
+	display: flex
+	align-items: center
+	color: rgba(256, 256 , 256, 0.5)
+
+	@media (max-width: 600px)
+		height: 20px
+	
+
+.hamburgerBox
+	width: 100%
+	height: 30px
+	position: absolute
+	top: 30px
+	left: 30px
+	display: none
+
+	.hamburger
+		max-height: 100%
+		object-fit: cover
+		cursor: pointer
+
+.closeBox
+	width: 100%
+	height: 20px
+	display: none
+	justify-content: flex-end
+
+	.close
+		max-height: 100%
+		object-fit: cover
+		cursor: pointer
 
 
 
 .blockSB
-	width: 200px
+	width: 250px
 	height: 100%
 	position: fixed
 	padding: 20px
 	-webkit-backdrop-filter:saturate(100%) blur(20px);  //for safari
 	backdrop-filter: saturate(100%) blur(20px)
-	background-color: rgba(240, 235 ,232, 0.8)
+	background-color: rgba(240, 235 ,232, 0.9)
 	overflow-y: auto
+	z-index: 1
 
 	&__select
-		margin-bottom: 20px
+		margin-top: 20px
+		margin-bottom: 30px
+		background-color: rgba(240, 235 ,232, 0.3)
+		border: 1px solid rgba(0, 0, 0, 0.2)
+		border-radius: 5px
+		width: 100%
+		height: 40px
+		color: $secondary70
+		text-align: center
+
 
 	&__container
 		height: 60px
@@ -54,7 +103,7 @@ textCenter(){
 
 	&__condition
 		position: absolute
-		bottom: 10px
+		bottom: 5px
 		left: 5px
 		color: $secondary50
 	
@@ -68,19 +117,22 @@ textCenter(){
 		position: absolute
 		bottom: 0
 		right: 5px
-		bottom: 10px
+		bottom: 5px
 		color: $secondary20
 
 	&__hr
 		width: 95%
-		border: 0.5px solid $secondary20
-		
+		border: 0.5px solid rgba(0, 0, 0, 0.2)
+
+	
+
 .mainBlock
-	width: 1000px
-	height: 800px
-	position: absolute
-	margin: 50px 100px 100px 100px
-	right: 0
+	width: 100%
+	height: 100%
+	overflow-y: auto
+	padding-top: 110px
+	padding-bottom: 110px
+	padding-left: 250px
 
 
 .headline
@@ -97,28 +149,16 @@ textCenter(){
 		position: relative
 
 	&__area 
-		width: 100%
-		text-align: center
-		display: inline-block
-		text-shadow: 2px 2px 10px rgba(0, 0 , 0, 0.6)
+		textCenter()
 
 	&__temp
-		width: 100%
-		text-align: center
-		display: inline-block
-		text-shadow: 2px 2px 10px rgba(0, 0 , 0, 0.6)
+		textCenter()
 
 	&__condition
-		width: 100%
-		text-align: center
-		display: inline-block
-		text-shadow: 2px 2px 10px rgba(0, 0 , 0, 0.6)
+		textCenter()
 
 	&__subtemp
-		width: 100%
-		text-align: center
-		display: inline-block
-		text-shadow: 2px 2px 10px rgba(0, 0 , 0, 0.6)
+		textCenter()
 
 .areaInfo
 	width: 100%
@@ -137,6 +177,7 @@ textCenter(){
 	"block1 block1 block1 block1" "block2 block2 block3 block4" "block2 block2 block5 block6" 
 	justify-content: center
 	
+	
 
 .box
 	width: 100%
@@ -144,15 +185,14 @@ textCenter(){
 	border-radius: 10px
 	-webkit-backdrop-filter:saturate(100%) blur(20px);  //for safari
 	backdrop-filter: saturate(100%) blur(20px)
-	background-color: rgba(0, 0 ,0, 0.2)
-	// border: 1px solid #fff
+	background-color: rgba(128, 128, 128, 0.08)
 
 .byHour
 	grid-area: block1;
 	display: flex
 	flex-wrap: wrap
 	overflow-x: auto
-	padding-left: 30px
+	padding-left: 20px
 	
 
 	&__title
@@ -164,16 +204,14 @@ textCenter(){
 		padding: 5px 0 5px 0
 		display: flex
 		align-items: center
-		position: fixed
 
 .hourInfo
 	width: auto
 	height: 70%
 	display: flex
 	align-items: center
-	border-top: 0.5px solid $secondary10
+	border-top: 0.5px solid rgba(256, 256, 256, 0.2)
 	padding-top:20px
-	margin-top: 40px
 
 	&__container
 		width: 70px
@@ -202,7 +240,7 @@ textCenter(){
 .byWeek
 	grid-area: block2;
 	color: #fff
-	padding-top: 10px
+	padding-top: 5px
 	
 	&__title
 		height: 30px
@@ -210,6 +248,7 @@ textCenter(){
 		display: flex
 		align-items: center
 		margin-left: 20px
+		margin-bottom: 5px
 
 	&__hr
 		width: 90%
@@ -223,12 +262,12 @@ textCenter(){
 
 	&__container
 		width: 100%
-		height: 48px
+		height: 47px
 		display: flex
 		align-items: center
 		justify-content: space-between
 		padding: 5px
-		border-top: 0.5px solid $secondary10
+		border-top: 0.5px solid rgba(256, 256, 256, 0.2)
 
 
 	&__iconbox
@@ -260,22 +299,17 @@ textCenter(){
 
 .UV
 	grid-area: block3;
-	color: #fff
-	padding: 10px
-	position: relative
+	blockDefault()
 
 	&__title
-		height: 40px
-		width: 100%
-		display: flex
-		align-items: center
+		blockTitle()
 
 
 .UVBox
 	display: flex
 	align-items: center
 	justify-content: space-between
-	margin: 10px 0 10px 0
+	margin: 15px 0 15px 0
 
 	&__barBG
 		width: 100%
@@ -303,11 +337,91 @@ textCenter(){
 
 .humidity
 	grid-area: block4;
+	blockDefault()
+
+	&__title
+		blockTitle()
+
+	&__info
+		margin-top: 54px
 
 
 .apparentTemp
 	grid-area: block5;
+	blockDefault()
+
+	&__title
+		blockTitle()
+
+	&__info
+		margin-top: 54px
 
 
 .conclusion
 	grid-area: block6;
+	blockDefault()
+
+	&__title
+		blockTitle()
+
+@media (max-width: 1200px)
+
+	.areaInfo__container
+		grid-template-columns: 180px 180px;
+		grid-template-rows: 180px 180px 180px 180px 180px ;
+		grid-gap: 20px;
+		grid-template-areas: 
+		"block1 block1" "block2 block2" "block2 block2" "block3 block4" "block5 block6" 
+		justify-content: center
+
+	.blockSB
+		width: 200px
+
+	.mainBlock
+		padding-left: 200px
+
+@media (max-width: 600px)
+	.hamburgerBox
+		display: block
+
+	.closeBox
+		display: flex
+
+	.blockSB
+		width: 300px
+		z-index: 1
+		left: -300px
+
+	.mainBlock
+		padding-left: 0
+
+	.areaInfo__container
+		grid-template-columns: 150px 150px;
+		grid-template-rows: 150px 150px 150px 150px 150px ;
+
+	.dayInfo
+		&__container
+			height: 38px
+
+		&__iconbox
+			width: 20px
+			height: 20px
+
+	.UVBox
+		margin: 10px 0 10px 0
+
+	.humidity__info
+		margin-top: 44px;
+
+@keyframes slideIn 
+	0%
+		left: -300px
+	100%
+		left: 0px
+
+@keyframes slideOut
+	0%
+		left: 0px
+	100%
+		left: -300px
+
