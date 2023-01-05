@@ -3,15 +3,15 @@ const iconData={
     01: "sun",
     02: "cloudy",
     03: "cloudy",
-    04: "Cloud",
-    05: "Cloud",
-    06: "Cloud",
-    07: "Cloud",
-    24: "Cloud",
-    25: "Cloud",
-    26: "Cloud",
-    27: "Cloud",
-    28: "Cloud",
+    04: "cloud",
+    05: "cloud",
+    06: "cloud",
+    07: "cloud",
+    24: "cloud",
+    25: "cloud",
+    26: "cloud",
+    27: "cloud",
+    28: "cloud",
     08: "rain",
     09: "rain",
     10: "rain",
@@ -61,7 +61,7 @@ const countyIds={
     "F-D0047-071":"新北市",
     "F-D0047-075":"臺中市",
     "F-D0047-079":"臺南市",
-    "F-D0047-083":"臺南市",
+    "F-D0047-083":"連江縣",
     "F-D0047-087":"金門縣",
 }
 
@@ -121,9 +121,9 @@ function renderHourForecast(){
         iconImg.src="./image/icon/moon_rain.png";
     }else if (getHour>=17 && getHour<=24 && icon==="sun_rain"){
         iconImg.src="./image/icon/moon_rain.png";
-    }else if(getHour<6 && icon==="Cloud"){
+    }else if(getHour<6 && icon==="cloud"){
         iconImg.src="./image/icon/moon_cloud.png";
-    }else if(getHour>=17 && getHour<=24 && icon==="Cloud"){
+    }else if(getHour>=17 && getHour<=24 && icon==="cloud"){
         iconImg.src="./image/icon/moon_cloud.png";
     }else{
         iconImg.src=`./image/icon/${icon}.png`;
@@ -227,9 +227,9 @@ function renderHourForecast(){
             iconImg.src="./image/icon/moon_rain.png";
         }else if (getHour>=17 && getHour<=24 && icon==="sun_rain"){
             iconImg.src="./image/icon/moon_rain.png";
-        }else if(getHour<6 && icon==="Cloud"){
+        }else if(getHour<6 && icon==="cloud"){
             iconImg.src="./image/icon/moon_cloud.png";
-        }else if(getHour>=17 && getHour<=24 && icon==="Cloud"){
+        }else if(getHour>=17 && getHour<=24 && icon==="cloud"){
             iconImg.src="./image/icon/moon_cloud.png";
         }else{
             iconImg.src=`./image/icon/${icon}.png`;
