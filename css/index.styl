@@ -2,7 +2,7 @@
 
 html
 	background: no-repeat center center fixed;
-	background-image: url('../image/background/night.jpg') 
+	background-image: url('../image/background/morning_light_rain.jpg') 
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -75,8 +75,6 @@ blockTitle()
 		object-fit: cover
 		cursor: pointer
 
-
-
 .blockSB
 	width: 250px
 	height: 100%
@@ -84,10 +82,12 @@ blockTitle()
 	padding: 10px
 	-webkit-backdrop-filter:saturate(100%) blur(20px);  //for safari
 	backdrop-filter: saturate(100%) blur(20px)
-	background-color: rgba(240, 235 ,232, 0.8)
+	background-color: rgba(229, 229, 229, 0.7)
 	overflow-y: auto
 	z-index: 1
 	scrollbar-gutter: stable;
+
+
 
 	&::-webkit-scrollbar {
 	width: 8px;    
@@ -113,10 +113,14 @@ blockTitle()
 		height: 40px
 		color: $secondary70
 		text-align: center
+		cursor: pointer
 
 		&:focus
-			outline: none;
+			outline: none
 
+		& > option:hover
+			background-color #fff
+			cursor: pointer
 
 	&__container
 		height: 60px
@@ -126,11 +130,11 @@ blockTitle()
 		transition: 0.3s
 
 		&:hover
-			background-color: rgba(240, 235 ,232, 0.4)
+			background-color: rgba(240, 235 ,232, 0.6)
 			transition: 0.3s
 			cursor: pointer
 	.active
-		background-color: rgba(240, 235 ,232, 0.4)
+		background-color: rgba(240, 235 ,232, 0.6)
 
 	&__area
 		position: absolute
@@ -160,7 +164,7 @@ blockTitle()
 		width: 95%
 		border: 0.5px solid rgba(0, 0, 0, 0.2)
 
-	
+
 
 .mainBlock
 	width: 100%
@@ -169,7 +173,6 @@ blockTitle()
 	padding-top: 110px
 	padding-bottom: 110px
 	padding-left: 250px
-
 
 .headline
 	width: 100%
@@ -228,7 +231,7 @@ blockTitle()
 	display: flex
 	flex-wrap: wrap
 	overflow-x: auto
-	scrollbar-gutter: stable both-edges;
+	scrollbar-gutter: auto;
 	padding-left: 10px
 
 	&::-webkit-scrollbar {

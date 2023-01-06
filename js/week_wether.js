@@ -55,7 +55,7 @@ function createTempBox() { //生成tempBox
         if (i == 0) {
             const tempBox__point = document.createElement("div")
             tempBox__point.className = "tempBox__point"
-            tempBox__bar.appendChild(tempBox__point)
+            tempBox__barBG.appendChild(tempBox__point)
         }
 
     }
@@ -63,13 +63,13 @@ function createTempBox() { //生成tempBox
 
 
 async function getData(countryName) {
-    const url = `https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-091?Authorization=CWB-2362029B-8E57-4537-AD95-9B5CD8AB3D8D&locationName=${countryName}&lelmentName=UVI&elementName=RH&elementName=UVI&elementName=MaxAT&elementName=MinAT&elementName=WeatherDescription&elementName=Wx&elementName=T&elementName=Td`
+    const url = `https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-091?Authorization=CWB-2362029B-8E57-4537-AD95-9B5CD8AB3D8D&locationName=${countryName}&lelmentName=UVI&elementName=RH&elementName=UVI&elementName=MaxT&elementName=MinT&elementName=WeatherDescription&elementName=Wx&elementName=T&elementName=Td`
     await fetch(url).then(function (res) {
         return res.json()
     }).then(function (data) {
         result = data.records.locations[0].location[0].weatherElement
-        let maxATWeek, minATWeek;
-        let maxATweekEvery = [], minATweekEvery = [];
+        let maxTWeek, MinTWeek;
+        let maxTweekEvery = [], minTweekEvery = [];
         for (let j of result) {
             if (j.elementName == 'RH') {//平均相對濕度
                 const humidityNum = document.querySelector('.humidity__num');
@@ -128,95 +128,97 @@ async function getData(countryName) {
                 let humidity__info = document.querySelector(".humidity__info")
                 humidity__info.innerText = `平均露點溫度為${Td[0].elementValue[0].value}`
             }
-            else if (j.elementName == 'MinAT') {//最低體感溫度
-                const MinAT = j.time
+            else if (j.elementName == 'MinT') {//最低溫度
+                const MinT = j.time
                 const temBoxLow = document.querySelectorAll(".tempBox__low")
                 let k = 0;
-                minATWeek = MinAT[0].elementValue[0].value;
+                minTWeek = MinT[0].elementValue[0].value;
 
-                if (MinAT.length == 15) {
-                    temBoxLow[0].innerHTML = MinAT[0].elementValue[0].value + "°";
-                    minATweekEvery.push(MinAT[0].elementValue[0].value);
+                if (MinT.length == 15) {
+                    temBoxLow[0].innerHTML = MinT[0].elementValue[0].value + "°";
+                    minTweekEvery.push(MinT[0].elementValue[0].value);
                     k = 1;
-                    MinAT.shift();
-                    MinAT.pop();
-                    MinAT.pop();
+                    MinT.shift();
+                    MinT.pop();
+                    MinT.pop();
                 }
 
-                for (let i = 0; i < MinAT.length; i++) {
+                for (let i = 0; i < MinT.length; i++) {
                     if (i % 2 == 0) {
-                        temBoxLow[k].innerHTML = MinAT[i].elementValue[0].value + "°"
-                        minATweekEvery.push(MinAT[i].elementValue[0].value);
+                        temBoxLow[k].innerHTML = MinT[i].elementValue[0].value + "°"
+                        minTweekEvery.push(MinT[i].elementValue[0].value);
                     } else {
-                        if (temBoxLow[k].innerHTML > MinAT[i].elementValue[0].value) {
-                            temBoxLow[k].innerHTML = MinAT[i].elementValue[0].value + "°"
-                            minATweekEvery.pop();
-                            minATweekEvery.push(MinAT[i].elementValue[0].value);
+                        if (temBoxLow[k].innerHTML > MinT[i].elementValue[0].value) {
+                            temBoxLow[k].innerHTML = MinT[i].elementValue[0].value + "°"
+                            minTweekEvery.pop();
+                            minTweekEvery.push(MinT[i].elementValue[0].value);
                         }
                         k++;
                     }
 
-                    if (minATWeek >= MinAT[i].elementValue[0].value) minATWeek = MinAT[i].elementValue[0].value
+                    if (minTWeek >= MinT[i].elementValue[0].value) minTWeek = MinT[i].elementValue[0].value
                 }
             }
-            else if (j.elementName == 'MaxAT') {//最高體感溫度
-                const MaxAT = j.time
+            else if (j.elementName == 'MaxT') {//最高體感溫度
+                const MaxT = j.time
                 const temBoxHigh = document.querySelectorAll(".tempBox__high")
                 let k = 0;
-                maxATWeek = MaxAT[0].elementValue[0].value;
+                maxTWeek = MaxT[0].elementValue[0].value;
 
-                if (MaxAT.length == 15) {
-                    temBoxHigh[0].innerHTML = MaxAT[0].elementValue[0].value + "°";
-                    maxATweekEvery.push(MaxAT[0].elementValue[0].value);
+                if (MaxT.length == 15) {
+                    temBoxHigh[0].innerHTML = MaxT[0].elementValue[0].value + "°";
+                    maxTweekEvery.push(MaxT[0].elementValue[0].value);
                     k = 1;
-                    MaxAT.shift();
-                    MaxAT.pop();
-                    MaxAT.pop();
+                    MaxT.shift();
+                    MaxT.pop();
+                    MaxT.pop();
                 }
-                for (let i = 0; i < MaxAT.length; i++) {
+                for (let i = 0; i < MaxT.length; i++) {
                     if (i % 2 == 0) {
-                        temBoxHigh[k].innerHTML = MaxAT[i].elementValue[0].value + "°"
-                        maxATweekEvery.push(MaxAT[i].elementValue[0].value);
+                        temBoxHigh[k].innerHTML = MaxT[i].elementValue[0].value + "°"
+                        maxTweekEvery.push(MaxT[i].elementValue[0].value);
                     } else {
-                        if (temBoxHigh[k].innerHTML < MaxAT[i].elementValue[0].value) {
-                            temBoxHigh[k].innerHTML = MaxAT[i].elementValue[0].value + "°"
-                            maxATweekEvery.pop();
-                            maxATweekEvery.push(MaxAT[i].elementValue[0].value);
+                        if (temBoxHigh[k].innerHTML < MaxT[i].elementValue[0].value) {
+                            temBoxHigh[k].innerHTML = MaxT[i].elementValue[0].value + "°"
+                            maxTweekEvery.pop();
+                            maxTweekEvery.push(MaxT[i].elementValue[0].value);
                         }
                         k++;
                     }
 
-                    if (maxATWeek < MaxAT[i].elementValue[0].value) maxATWeek = MaxAT[i].elementValue[0].value
+                    if (maxTWeek < MaxT[i].elementValue[0].value) maxTWeek = MaxT[i].elementValue[0].value
 
                 }
             }
 
         }
         //變更tempBox__bar長度
-        console.log(minATWeek, maxATWeek)
-        minATWeek = parseInt(minATWeek)
-        maxATWeek = parseInt(maxATWeek)
-        TempRange = maxATWeek - minATWeek
+        minTWeek = parseInt(minTWeek)
+        maxTWeek = parseInt(maxTWeek)
+        TempRange = maxTWeek - minTWeek
         const tempBoxarBG = document.getElementsByClassName('tempBox__bar');
         for (let i = 0; i <= 6; i++) {
-            maxRange = maxATWeek - maxATweekEvery[i];
+            maxRange = maxTWeek - maxTweekEvery[i];
             maxPercent = maxRange / TempRange * 100;
-            minRange = minATweekEvery[i] - minATWeek;
+            minRange = minTweekEvery[i] - minTWeek;
             minPercent = minRange / TempRange * 100;
             tempBoxarBG[i].style.clipPath = `inset(0 ${maxPercent}% 0 ${minPercent}% round 5px)`;
         }
 
-        let url2 = `https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWB-2362029B-8E57-4537-AD95-9B5CD8AB3D8D&locationName=${countryName}&elementName=Min&elementName=TMaxT`
+        let url2 = `https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWB-2362029B-8E57-4537-AD95-9B5CD8AB3D8D&locationName=${countryName}`
         fetch(url2).then(function (res) {
             return res.json()
         }).then(function (data) {
-            console.log(data)
+            const minT = Number(data.records.location[0].weatherElement[2].time[0].parameter.parameterName)
+            const maxT = Number(data.records.location[0].weatherElement[4].time[0].parameter.parameterName)
+            const avgT = (minT + maxT) / 2
+            //調整temp__point位置
+            const tempBox__point = document.querySelector('.tempBox__point');
+            // const nowTemp = parseInt(document.getElementsByClassName('headline__temp')[0].innerText);
+            nowPercent = (avgT - minTWeek) / TempRange * 100;
+            tempBox__point.style.left = `${nowPercent}%`;
+
         })
-        //調整temp__point位置
-        const temp__point = document.querySelector('.tempBox__point');
-        const nowTemp = parseInt(document.getElementsByClassName('headline__temp')[0].innerText);
-        nowPercent = (nowTemp - minATWeek) / TempRange * 100;
-        temp__point.style.left = `${nowPercent}%`;
 
         //變更週
         let now = new Date()
