@@ -251,7 +251,7 @@ body::-webkit-scrollbar-thumb {
   display: flex;
   flex-wrap: wrap;
   overflow-x: auto;
-  scrollbar-gutter: stable both-edges;
+  scrollbar-gutter: auto;
   padding-left: 10px;
 }
 .byHour::-webkit-scrollbar {
