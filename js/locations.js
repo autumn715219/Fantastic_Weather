@@ -61,8 +61,6 @@ async function fetchData(countryIds) {
       let locationArry = data.records.locations[0].location;
       locationArry.forEach((item,i) => renderContent(item,i));
       locationCardLoad(locationArry);
-      //console.log(countryIds);
-      //console.log(data.records.locations[0].location);
     }
   }    
   catch (err) {
@@ -97,11 +95,19 @@ const renderSevenDaate = (item,i,min,max) => {
   //console.log (item,i,min,max)
   let range = max - min;
   let left = (item.minT - min)/range * 100 ;
-  let leftValue = left.toFixed(2)+'%'
-
+  let leftValue = left.toFixed(2)+'%';
   let right = (max - item.maxT)/range * 100 ;
   let rightValue = right.toFixed(2) +'%';
-  let iconImg=iconSwitch(item.wx);
+  let iconImg = iconSwitch(item.wx);
+  let isFirstItemPoint = isFirstItem(i);
+  let averageT = ((item.maxT - min)-((item.maxT-item.minT)*.7))/range * 100;
+  //console.log(averageT)
+  let averageTValue = averageT.toFixed(2)+'%';
+  function isFirstItem(i){ 
+    //console.log(i)
+    if(i===0){ return 'block' }else{ return 'none' } 
+  }
+
   const htmlStr = `<div class="dayInfo">
                       <div class="dayInfo__container">
                         <div class="dayInfo__date">${item.week}</div>
@@ -115,6 +121,7 @@ const renderSevenDaate = (item,i,min,max) => {
                           <div class="tempBox__low">${item.minT}</div>
                           <div class="tempBox__barBG">
                             <div class="tempBox__bar" style="clip-path:inset(0 ${rightValue} 0 ${leftValue} round 5px);">
+                            <div class="tempBox__point" style="display:${isFirstItemPoint};left:${averageTValue};"></div>
                             </div>
                           </div>
                           <div class="tempBox__high">${item.maxT}</div>
@@ -147,7 +154,7 @@ function renderCard(item){
   let locationWx = item.weatherElement[6].time[0].elementValue[0].value; //天氣現象
   let locationWxtext = Number(item.weatherElement[6].time[0].elementValue[1].value); //天氣現象碼
   let now =new Date();
-  let time = now.getHours();
+  let time = Number(now.getHours());
   let background = getImgBackground(time,locationWxtext);
   let locationT = item.weatherElement[1].time[0].elementValue[0].value; //平均溫度
   let locationMinT = item.weatherElement[8].time[0].elementValue[0].value; //最低溫度
@@ -158,6 +165,7 @@ function renderCard(item){
   let condition = document.querySelector('.headline__condition.content');
   let subtemp = document.querySelector('.headline__subtemp.content');
   let html = document.querySelector('html');
+
   html.style.backgroundImage = `url(image/background/${background})`
   areaTitle.textContent = locationName;
   tempTitle.textContent = locationT +'°';
@@ -190,11 +198,13 @@ function renderCard(item){
   // apparentTemp
   let locationMaxAT = Number(item.weatherElement[5].time[0].elementValue[0].value); //最高體感溫度
   let locationMinAT = Number(item.weatherElement[11].time[0].elementValue[0].value); //最低體感溫度
+  let locationATText = item.weatherElement[7].time[0].elementValue[1].value; //最低體感溫度
+
   let locationAveryAT = (locationMaxAT+locationMinAT)/2;
   let apparentTemp = document.querySelector('.apparentTemp__num.digitMedium');
   let apparentTempInfo = document.querySelector('.apparentTemp__info.info');
   apparentTemp.textContent = locationAveryAT +'°';
-  apparentTempInfo.textContent = calcATInfo(locationT,locationAveryAT);
+  apparentTempInfo.textContent = locationATText;
 
   // conclusion
   let locationDesc = item.weatherElement[10].time[1].elementValue[0].value; //露點
@@ -240,18 +250,6 @@ function iconSwitch(code){
   if(sun_rain.includes(myCode)){ return "sun_rain";}
 }
 
-function calcATInfo(T,AT){
-  let Tem = Number(T); //實際溫度
-  let ATem = Number(AT); //體感溫度
-  if((Tem-ATem)>1.5){
-    return "實際溫度較體感溫度略高。"
-  }
-  if((ATem-Tem)>1.5){
-    return "實際溫度較體感溫度略低。"
-  }else{
-    return "與實際氣溫接近。"
-  }
-}
 function getImgBackground(time,code){
   let sun = [1,24];
   let cloud = [2,3,4,25,26,27,31,36,37];
@@ -262,33 +260,35 @@ function getImgBackground(time,code){
   let thunderstorm =[18,21,22,33,34,35];
   //let snow =[23,42];
   if(sun.includes(code)){
-    if( 0<=time<5){ return 'night.jpg' }
-    if( 5<=time<9){ return 'early_morning_sun.jpg' }
-    if( 9<=time<16){ return 'morning_sun.jpg' }
-    if( 16<=time<19){ return 'evening_sun.jpg' }
-    if( 19<=time<24){ return 'night.jpg' }
+    if( 0<=time && time<5){ return 'night.jpg' }
+    if( 5<=time && time<9){ return 'early_morning_sun.jpg' }
+    if( 9<=time && time<16){ return 'morning_sun.jpg' }
+    if( 16<=time && time<19){ return 'evening_sun.jpg' }
+    if( 19<=time && time<24){ return 'night.jpg' }
   }
   if(cloud.includes(code)){
-    if( 0<=time<5){ return 'night_partly_cloudy.jpg' }
-    if( 5<=time<9){ return 'early_morning_sun.jpg' }
-    if( 9<=time<16){ return 'morning_partly_cloudy.jpg' }
-    if( 16<=time<19){ return 'evening_sun.jpg' }
-    if( 19<=time<24){ return 'night_partly_cloudy.jpg' }
+    if( 0<=time && time<5){ console.log('0~5'); return 'night_partly_cloudy.jpg' };
+    if( 5<=time && time<9){ console.log('5~9'); return 'early_morning_sun.jpg' };
+    if( 9<=time && time<16){ console.log('9~16'); return 'morning_partly_cloudy.jpg' };
+    if( 16<=time && time<19){ console.log('16~19'); return 'evening_sun.jpg' };
+    if( 19<=time && time<24){ console.log('19~24'); return 'night_partly_cloudy.jpg' };
+
   }
   if(cloudy.includes(code)){
-    if( 0<=time<5){ return 'night_cloudy.jpg' }
-    if( 5<=time<19){ return 'morning_cloudy.jpg' }
-    if( 19<=time<24){ return 'night_cloudy.jpg' }
+    if( 5<=time && time<19){ return 'morning_cloudy.jpg' }
+    if( 19<=time && time<24){ return 'night_cloudy.jpg' }
+    if( 0<=time && time<5){ return 'night_cloudy.jpg' }
+
   }
   if(dark_cloudy.includes(code)){
-    if( 0<=time<5){ return 'night_cloudy.jpg' }
-    if( 5<=time<19){ return 'morining_dark_cloudy.jpg' }
-    if( 19<=time<24){ return 'night_cloudy.jpg' }
+    if( 0<=time && time<5){ return 'night_cloudy.jpg' }
+    if( 5<=time && time<19){ return 'morining_dark_cloudy.jpg' }
+    if( 19<=time && time<24){ return 'night_cloudy.jpg' }
   }
   if(small_rain.includes(code)){
-    if( 0<=time<5){ return 'night_light_rain.jpg' }
-    if( 5<=time<19){ return 'morning_light_rain.jpg' }
-    if( 19<=time<24){ return 'night_light_rain.jpg' }
+    if( 0<=time && time<5){ return 'night_light_rain.jpg' }
+    if( 5<=time && time<19){ return 'morning_light_rain.jpg' }
+    if( 19<=time && time<24){ return 'night_light_rain.jpg' }
   }
   if(heavy_rain.includes(code)){
     return 'heavy_rain.jpg'
@@ -303,8 +303,7 @@ function sevenDaysWeather(minT,maxT,Wx){
   let maxArry =[];
   let dateArry =[];
   let dataArry =[];
-  let dataArry2 =[];
-  for (var i = 0; i < 13; i++) {
+  for (var i = 0; i < 14; i++) {
     let startTime = minT[i].startTime;
     let date = startTime.split(/\s+/);
     let dateValue = date[0];
@@ -322,17 +321,6 @@ function sevenDaysWeather(minT,maxT,Wx){
       };
       dateArry.push(dateValue);
       dataArry.push(data);
-    }else{
-      //第二筆資料
-      //console.log(dateValue+'已在Arry')
-      // let data2 = { 
-      //   'date':dateValue,
-      //   'week':getWeekName(dateValue),
-      //   'minT':data_minT,
-      //   'maxT':data_maxT,
-      //   'wx':data_wx
-      // };
-      // dataArry2.push(data2);
     }
     maxArry.push(Number(maxT[i].elementValue[0].value));
     minArry.push(Number(minT[i].elementValue[0].value));
@@ -340,29 +328,10 @@ function sevenDaysWeather(minT,maxT,Wx){
 
   let min = Math.min.apply(null, minArry);
   let max = Math.max.apply(null, maxArry);
-  //console.log(min,max) 最大最小值
-  //console.log(dataArry) //比較array1
-  //console.log(dataArry2) //比較array2
-  //let rightTempArray = getRightTemp(dataArry,dataArry2);
-  //console.log(dataArry);
+
   dataArry.forEach((item,i) => renderSevenDaate(item,i,min,max));
 }
 
-function getRightTemp(array1,array2){
-  // for (let i = 0; i < array1.length; i++) {
-  //     for( let j=0;  j < array2.length; j++){
-  //         if(array1[i].date === array2[i].date){
-  //             if(array1[i].minT > array2[j].minT){
-  //               array1[i].minT = array2[j].minT
-  //             }
-  //             if(array1[i].maxT < array2[j].maxT){
-  //               array1[i].maxT = array2[j].maxT
-  //             }
-  //         }
-  //     }
-  //}
-  return array1
-}
 
 function getWeekName(date){
   let now =new Date().getDate();
