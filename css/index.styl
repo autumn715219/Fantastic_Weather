@@ -2,7 +2,7 @@
 
 html
 	background: no-repeat center center fixed;
-	background-image: url('../image/background/morning_partly_cloudy.jpg') 
+	background-image: url('../image/background/night.jpg') 
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -81,7 +81,7 @@ blockTitle()
 	width: 250px
 	height: 100%
 	position: fixed
-	padding: 20px
+	padding: 10px
 	-webkit-backdrop-filter:saturate(100%) blur(20px);  //for safari
 	backdrop-filter: saturate(100%) blur(20px)
 	background-color: rgba(240, 235 ,232, 0.8)
@@ -113,25 +113,24 @@ blockTitle()
 		height: 40px
 		color: $secondary70
 		text-align: center
-		// transition: 0.4s ease
 
-		// &:focus
-		// 	transform: scale(1.07)
-		// 	outline: none;
-		// 	transition: 0.4s ease
+		&:focus
+			outline: none;
 
 
 	&__container
 		height: 60px
 		padding: 5px
 		position: relative
-		border-radius: 10px
+		border-radius: 5px
 		transition: 0.3s
 
 		&:hover
 			background-color: rgba(240, 235 ,232, 0.4)
 			transition: 0.3s
 			cursor: pointer
+	.active
+		background-color: rgba(240, 235 ,232, 0.4)
 
 	&__area
 		position: absolute
@@ -356,6 +355,7 @@ blockTitle()
 		background: linear-gradient(90deg, rgba(34,193,195,1) 0%, rgba(255,179,14,1) 100%);
 		border-radius: 5px
 		position: absolute
+		clip-path:inset(0 10% 0 0 round 5px);
 
 	&__point
 		height: 10px
