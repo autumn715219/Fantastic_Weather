@@ -1,7 +1,7 @@
 //監聽是否有select change
 select = document.getElementById("country-list")
 select.addEventListener("change", function () {
-
+    document.querySelector("#weekForecast").innerHTML = ""
     createTempBox();
     getData(select.options[select.selectedIndex].text);
     getAvgT(select.options[select.selectedIndex].text);
@@ -52,6 +52,12 @@ function createTempBox() { //生成tempBox
         const tempBox__bar = document.createElement("div")
         tempBox__bar.className = "tempBox__bar"
         tempBox__barBG.appendChild(tempBox__bar)
+        if (i == 0) {
+            const tempBox__point = document.createElement("div")
+            tempBox__point.className = "tempBox__point"
+            tempBox__bar.appendChild(tempBox__point)
+        }
+
     }
 }
 
@@ -126,10 +132,10 @@ async function getData(countryName) {
                 const MinAT = j.time
                 const temBoxLow = document.querySelectorAll(".tempBox__low")
                 let k = 0;
+                minATWeek = MinAT[0].elementValue[0].value;
 
                 if (MinAT.length == 15) {
                     temBoxLow[0].innerHTML = MinAT[0].elementValue[0].value + "°";
-                    minATWeek = MinAT[0].elementValue[0].value;
                     minATweekEvery.push(MinAT[0].elementValue[0].value);
                     k = 1;
                     MinAT.shift();
@@ -157,9 +163,10 @@ async function getData(countryName) {
                 const MaxAT = j.time
                 const temBoxHigh = document.querySelectorAll(".tempBox__high")
                 let k = 0;
+                maxATWeek = MaxAT[0].elementValue[0].value;
+
                 if (MaxAT.length == 15) {
                     temBoxHigh[0].innerHTML = MaxAT[0].elementValue[0].value + "°";
-                    maxATWeek = MaxAT[0].elementValue[0].value;
                     maxATweekEvery.push(MaxAT[0].elementValue[0].value);
                     k = 1;
                     MaxAT.shift();
@@ -185,14 +192,32 @@ async function getData(countryName) {
             }
 
         }
+        //變更tempBox__bar長度
+        console.log(minATWeek, maxATWeek)
+        minATWeek = parseInt(minATWeek)
+        maxATWeek = parseInt(maxATWeek)
+        TempRange = maxATWeek - minATWeek
         const tempBoxarBG = document.getElementsByClassName('tempBox__bar');
         for (let i = 0; i <= 6; i++) {
             maxRange = maxATWeek - maxATweekEvery[i];
-            maxPercent = maxRange / maxATWeek * 100;
+            maxPercent = maxRange / TempRange * 100;
             minRange = minATweekEvery[i] - minATWeek;
-            minPercent = minRange / minATWeek * 100;
+            minPercent = minRange / TempRange * 100;
             tempBoxarBG[i].style.clipPath = `inset(0 ${maxPercent}% 0 ${minPercent}% round 5px)`;
         }
+
+        let url2 = `https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWB-2362029B-8E57-4537-AD95-9B5CD8AB3D8D&locationName=${countryName}&elementName=Min&elementName=TMaxT`
+        fetch(url2).then(function (res) {
+            return res.json()
+        }).then(function (data) {
+            console.log(data)
+        })
+        //調整temp__point位置
+        const temp__point = document.querySelector('.tempBox__point');
+        const nowTemp = parseInt(document.getElementsByClassName('headline__temp')[0].innerText);
+        nowPercent = (nowTemp - minATWeek) / TempRange * 100;
+        temp__point.style.left = `${nowPercent}%`;
+
         //變更週
         let now = new Date()
         const day1 = now.getDay();
