@@ -92,6 +92,7 @@ const renderContent = (item,i) => {
 
 //組出7天天氣預測
 const renderSevenDaate = (item,i,min,max) => {
+  if( i<=6 ){
   //console.log (item,i,min,max)
   let range = max - min;
   let left = (item.minT - min)/range * 100 ;
@@ -130,6 +131,7 @@ const renderSevenDaate = (item,i,min,max) => {
                     </div>`
 
                     sevendaysWrp.insertAdjacentHTML("beforeend",htmlStr);
+  }
 };
 
 //左側選單點擊事件
