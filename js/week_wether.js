@@ -161,7 +161,6 @@ async function getData(countryName) {
             }
             else if (j.elementName == 'MaxT') {//最高體感溫度
                 const MaxT = j.time
-                console.log(MaxT)
                 const temBoxHigh = document.querySelectorAll(".tempBox__high")
                 let k = 0;
                 maxTWeek = MaxT[0].elementValue[0].value;
@@ -255,10 +254,3 @@ async function getAvgT(countryName) {
         apparentTemp__info.innerText = comfortable
     })
 }
-
-const url3 = `https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-091?Authorization=CWB-2362029B-8E57-4537-AD95-9B5CD8AB3D8D&locationName=連江縣`
-fetch(url3).then(function (res) {
-    return res.json()
-}).then(function (data) {
-    console.log(data.records.locations[0].location[0].weatherElement)
-})
