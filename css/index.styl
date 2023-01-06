@@ -75,8 +75,6 @@ blockTitle()
 		object-fit: cover
 		cursor: pointer
 
-
-
 .blockSB
 	width: 250px
 	height: 100%
@@ -88,6 +86,8 @@ blockTitle()
 	overflow-y: auto
 	z-index: 1
 	scrollbar-gutter: stable;
+
+
 
 	&::-webkit-scrollbar {
 	width: 8px;    
@@ -113,10 +113,14 @@ blockTitle()
 		height: 40px
 		color: $secondary70
 		text-align: center
+		cursor: pointer
 
 		&:focus
-			outline: none;
+			outline: none
 
+		& > option:hover
+			background-color #fff
+			cursor: pointer
 
 	&__container
 		height: 60px
