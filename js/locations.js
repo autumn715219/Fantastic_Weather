@@ -120,9 +120,9 @@ const renderSevenDaate = (item,i,min,max) => {
                         <div class="tempBox">
                           <div class="tempBox__low">${item.minT}</div>
                           <div class="tempBox__barBG">
-                            <div class="tempBox__bar" style="clip-path:inset(0 ${rightValue} 0 ${leftValue} round 5px);">
+                            <div class="tempBox__bar" style="clip-path:inset(0 ${rightValue} 0 ${leftValue} round 5px);"></div>
                             <div class="tempBox__point" style="display:${isFirstItemPoint};left:${averageTValue};"></div>
-                            </div>
+
                           </div>
                           <div class="tempBox__high">${item.maxT}</div>
                         </div>
@@ -135,15 +135,22 @@ const renderSevenDaate = (item,i,min,max) => {
 //左側選單點擊事件
 function locationCardLoad(arry){
   let locationCards = document.getElementsByClassName('blockSB__container');
-  for (var i = 0; i < locationCards.length; i++) {
+  for (let i = 0; i < locationCards.length; i++) {
       let self = locationCards[i];
       self.addEventListener('click', function (event) {  
         let index = this.getAttribute('data-index'); //html-->data-modal="modal2"
+        for (let j=0; j <locationCards.length; j++){
+          if(locationCards[j].classList.contains('active')){
+            locationCards[j].classList.remove('active');
+          }
+        }
+        this.classList.add("active");
         sevendaysWrp.innerHTML="";
         renderCard(arry[index]);
         //console.log(arry[index])
       }, false);
   }
+
 }
 
 //組出右側內容
