@@ -130,9 +130,14 @@ body::-webkit-scrollbar-thumb {
   height: 40px;
   color: #414141;
   text-align: center;
+  cursor: pointer;
 }
 .blockSB__select:focus {
   outline: none;
+}
+.blockSB__select > option:hover {
+  background-color: #fff;
+  cursor: pointer;
 }
 .blockSB__container {
   height: 60px;
