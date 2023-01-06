@@ -49,7 +49,7 @@
 }
 html {
   background: no-repeat center center fixed;
-  background-image: url("../image/background/morning_partly_cloudy.jpg");
+  background-image: url("../image/background/night_cloudy.jpg");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -142,6 +142,9 @@ body::-webkit-scrollbar-thumb {
   background-color: rgba(240,235,232,0.4);
   transition: 0.3s;
   cursor: pointer;
+}
+.blockSB .active {
+  background-color: rgba(240,235,232,0.4);
 }
 .blockSB__area {
   position: absolute;
@@ -367,6 +370,7 @@ body::-webkit-scrollbar-thumb {
   background: linear-gradient(90deg, #22c1c3 0%, #ffb30e 100%);
   border-radius: 5px;
   position: absolute;
+  clip-path: inset(0 10% 0 0 round 5px);
 }
 .tempBox__point {
   height: 10px;
