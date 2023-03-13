@@ -1,99 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>天氣</title>
-		<link rel="stylesheet" type="text/css" href="css/reset.css" />
-		<link rel="stylesheet" type="text/css" href="css/common.css" />
-		<link rel="stylesheet" type="text/css" href="css/index.css" />
-	</head>
-	<body>
-		<sideBar>
-			<div class="blockSB">
-				<div class="closeBox">
-					<img class="close" src="./image/icon/close.png" />
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>天氣</title>
+	<link rel="stylesheet" type="text/css" href="css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="css/common.css" />
+	<link rel="stylesheet" type="text/css" href="css/index.css" />
+</head>
+
+<body>
+	<sideBar>
+		<div class="blockSB">
+			<div class="closeBox">
+				<img class="close" src="./image/icon/close.png" />
+			</div>
+			<select id="country-list" class="blockSB__select contentSB" onchange="fetchData(this.value)"></select>
+			<div id="loactions"></div>
+		</div>
+	</sideBar>
+	<main class="main">
+		<div class="hamburgerBox">
+			<img class="hamburger" src="./image/icon/hamburger.png" />
+		</div>
+		<div class="mainBlock">
+			<div class="headline">
+				<div class="headline__container">
+					<div class="headline__area areaTitle"></div>
+					<div class="headline__temp tempTitle"></div>
+					<div class="headline__condition content"></div>
+					<div class="headline__subtemp content"></div>
 				</div>
-				<select
-					id="country-list"
-					class="blockSB__select contentSB"
-					onchange="fetchData(this.value)"
-				></select>
-				<div id="loactions"></div>
 			</div>
-		</sideBar>
-		<main class="main">
-			<div class="hamburgerBox">
-				<img class="hamburger" src="./image/icon/hamburger.png" />
-			</div>
-			<div class="mainBlock">
-				<div class="headline">
-					<div class="headline__container">
-						<div class="headline__area areaTitle"></div>
-						<div class="headline__temp tempTitle"></div>
-						<div class="headline__condition content"></div>
-						<div class="headline__subtemp content"></div>
+			<div class="areaInfo">
+				<div class="areaInfo__container">
+					<div class="box byHour">
+						<div class="byHour__title infoBold">
+							每3小時天氣預測
+						</div>
+						<div class="hourInfo"></div>
 					</div>
-				</div>
-				<div class="areaInfo">
-					<div class="areaInfo__container">
-						<div class="box byHour">
-							<div class="byHour__title infoBold">
-								每3小時天氣預測
-							</div>
-							<div class="hourInfo"></div>
+					<div class="box byWeek">
+						<div class="byWeek__title infoBold">
+							7天天氣預測
 						</div>
-						<div class="box byWeek">
-							<div class="byWeek__title infoBold">
-								7天天氣預測
-							</div>
-							<div id="weekForecast"></div>
-						</div>
-						<div class="box UV">
-							<div class="UV__title infoBold">紫外線指數</div>
-							<div class="UV__num digitMedium"></div>
-							<div class="UV__level"></div>
-							<div class="UVBox">
-								<div class="UVBox__barBG">
-									<div class="UVBox__bar">
-										<div class="UVBox__point"></div>
-									</div>
+						<div id="weekForecast"></div>
+					</div>
+					<div class="box UV">
+						<div class="UV__title infoBold">紫外線指數</div>
+						<div class="UV__num digitMedium"></div>
+						<div class="UV__level"></div>
+						<div class="UVBox">
+							<div class="UVBox__barBG">
+								<div class="UVBox__bar">
+									<div class="UVBox__point"></div>
 								</div>
 							</div>
-							<div class="UV__info info"></div>
 						</div>
-						<div class="box humidity">
-							<div class="humidity__title infoBold">溼度</div>
-							<div class="humidity__num digitMedium"></div>
-							<div class="humidity__info info"></div>
+						<div class="UV__info info"></div>
+					</div>
+					<div class="box humidity">
+						<div class="humidity__title infoBold">溼度</div>
+						<div class="humidity__num digitMedium"></div>
+						<div class="humidity__info info"></div>
+					</div>
+					<div class="box apparentTemp">
+						<div class="apparentTemp__title infoBold">
+							體感溫度
 						</div>
-						<div class="box apparentTemp">
-							<div class="apparentTemp__title infoBold">
-								體感溫度
-							</div>
-							<div class="apparentTemp__num digitMedium">15°</div>
-							<div class="apparentTemp__info info"></div>
+						<div class="apparentTemp__num digitMedium">15°</div>
+						<div class="apparentTemp__info info"></div>
+					</div>
+					<div class="box conclusion">
+						<div class="conclusion__title infoBold">
+							綜合描述
 						</div>
-						<div class="box conclusion">
-							<div class="conclusion__title infoBold">
-								綜合描述
-							</div>
-							<div class="conclusion__info info"></div>
-						</div>
+						<div class="conclusion__info info"></div>
 					</div>
 				</div>
 			</div>
-		</main>
-		<script>
-			// 以下是我申請的 KEY 請使用無所謂，你也可以自己去中央氣象局網站申請一個
-			// https://opendata.cwb.gov.tw/index
-			const CWB_API_KEY = "CWB-25142137-EFE4-4F9E-9B46-D41BF5BD73D5";
-		</script>
-		<script src="js/locations.js"></script>
-		<script src="js/hourInfo.js"></script>
-		<script src="js/general.js"></script>
-		<script src="js/week_wether.js"></script>
-		<script src="js/sidebar.js"></script>
-	</body>
+		</div>
+	</main>
+	<script>
+		// 以下是我申請的 KEY 請使用無所謂，你也可以自己去中央氣象局網站申請一個
+		// https://opendata.cwb.gov.tw/index
+		const CWB_API_KEY = "CWB-F3F9680F-74B8-445B-AFF8-95BEE218093A";
+	</script>
+	<script src="js/locations.js"></script>
+	<script src="js/hourInfo.js"></script>
+	<script src="js/general.js"></script>
+	<script src="js/week_wether.js"></script>
+	<script src="js/sidebar.js"></script>
+</body>
+
 </html>

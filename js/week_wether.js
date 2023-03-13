@@ -63,7 +63,7 @@ function createTempBox() { //生成tempBox
 
 
 async function getData(countryName) {
-    const url = `https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-091?Authorization=CWB-2362029B-8E57-4537-AD95-9B5CD8AB3D8D&locationName=${countryName}&lelmentName=UVI&elementName=RH&elementName=UVI&elementName=MaxT&elementName=MinT&elementName=WeatherDescription&elementName=Wx&elementName=T&elementName=Td`
+    const url = `https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-091?Authorization=${CWB_API_KEY}&locationName=${countryName}&lelmentName=UVI&elementName=RH&elementName=UVI&elementName=MaxT&elementName=MinT&elementName=WeatherDescription&elementName=Wx&elementName=T&elementName=Td`
     await fetch(url).then(function (res) {
         return res.json()
     }).then(function (data) {
@@ -205,7 +205,7 @@ async function getData(countryName) {
             tempBoxarBG[i].style.clipPath = `inset(0 ${maxPercent}% 0 ${minPercent}% round 5px)`;
         }
 
-        let url2 = `https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWB-2362029B-8E57-4537-AD95-9B5CD8AB3D8D&locationName=${countryName}`
+        let url2 = `https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=${CWB_API_KEY}&locationName=${countryName}`
         fetch(url2).then(function (res) {
             return res.json()
         }).then(function (data) {
@@ -240,7 +240,7 @@ async function getData(countryName) {
 }
 //取得體感溫度
 async function getAvgT(countryName) {
-    const url = `https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-089?Authorization=CWB-2362029B-8E57-4537-AD95-9B5CD8AB3D8D&locationName=${countryName}`
+    const url = `https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-089?Authorization=${CWB_API_KEY}&locationName=${countryName}`
     fetch(url).then(function (res) {
         return res.json()
     }).then(function (data) {
